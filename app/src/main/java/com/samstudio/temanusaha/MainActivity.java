@@ -1,5 +1,6 @@
 package com.samstudio.temanusaha;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.PopupMenu;
  */
 public class MainActivity extends AppCompatActivity {
     private ImageView optionMenuIV;
+    private Context context = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,11 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent();
                         switch (item.getItemId()) {
                             case R.id.term_of_service:
-                                intent.setClass(MainActivity.this, TermsActivity.class);
+                                intent.setClass(context, TermsActivity.class);
+                                break;
+
+                            case R.id.change_password:
+                                intent.setClass(context, ChangePasswordActivity.class);
                                 break;
                             default:
                                 break;

@@ -11,4 +11,8 @@
     <string name="logout">Logout</string>
     <string name="profile">Profile</string>
     <string name="application_and_status">Application \nStatus</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="save">Save</string>
 </resources>
