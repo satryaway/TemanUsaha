@@ -14,7 +14,7 @@ import android.widget.PopupMenu;
  * Show the main activity if user has logged in
  */
 public class MainActivity extends AppCompatActivity {
-    private ImageView optionMenuIV;
+    private ImageView optionMenuIV, profileIV;
     private Context context = MainActivity.this;
 
     @Override
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private void initUI() {
         setContentView(R.layout.main_layout);
         optionMenuIV = (ImageView) findViewById(R.id.option_menu_iv);
+        profileIV = (ImageView) findViewById(R.id.profile_iv);
     }
 
     private void setCallback() {
@@ -55,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 popup.show();
+            }
+        });
+
+        profileIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, InsertProfileActivity.class));
             }
         });
     }
