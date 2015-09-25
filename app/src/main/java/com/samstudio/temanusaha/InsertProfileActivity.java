@@ -1,6 +1,7 @@
 package com.samstudio.temanusaha;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -36,11 +38,11 @@ import java.lang.reflect.Method;
 public class InsertProfileActivity extends AppCompatActivity {
     private ImageView profilePictureIV;
     private EditText firstNameET, lastNameET, placeOfBirthET, dateOfBirthET, idCardNumberET, expiredIdET,
-        emailET, addressET, phoneNumberET;
-    private RadioGroup genderRG, statusRG;
+            emailET, addressET, phoneNumberET;
     private RadioButton maleRB, femaleRB, marriedRB, singleRB;
     private Button saveBtn;
-    private boolean isFormCompleted;
+    private boolean isPickDateOfBirth;
+    private DatePickerDialog datePickerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,10 @@ public class InsertProfileActivity extends AppCompatActivity {
         saveBtn = (Button) findViewById(R.id.save_btn);
         maleRB.setChecked(true);
         marriedRB.setChecked(true);
+
+        dateOfBirthET.setFocusable(false);
+        expiredIdET.setFocusable(false);
+        datePickerDialog = new DatePickerDialog(this, dateListener, 1990, 1, 1);
     }
 
     private void setCallBack() {
@@ -77,6 +83,7 @@ public class InsertProfileActivity extends AppCompatActivity {
                 makePopupDialog();
             }
         });
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +92,40 @@ public class InsertProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        dateOfBirthET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPickDateOfBirth = true;
+                datePickerDialog.show();
+            }
+        });
+
+        expiredIdET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPickDateOfBirth = false;
+                datePickerDialog.show();
+            }
+        });
     }
+
+    private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            showDate(year, monthOfYear, dayOfMonth);
+        }
+    };
+
+    private void showDate(int year, int month, int day) {
+        String fixedMonth = month < 10 ? "0" + month : "" + month;
+        String fixedDay = day < 10 ? "0" + day : "" + day;
+        if (isPickDateOfBirth)
+            dateOfBirthET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
+        else
+            expiredIdET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
+    }
+
 
     private boolean isFormVerified() {
         int filledFormTotal = 0;
@@ -107,6 +147,11 @@ public class InsertProfileActivity extends AppCompatActivity {
 
         if (dateOfBirthET.getText().length() == 0)
             dateOfBirthET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (idCardNumberET.getText().length() == 0)
+            idCardNumberET.setError(getString(R.string.should_not_be_empty_error));
         else
             filledFormTotal++;
 
@@ -135,7 +180,7 @@ public class InsertProfileActivity extends AppCompatActivity {
         else
             filledFormTotal++;
 
-        return filledFormTotal == 9;
+        return filledFormTotal == 10;
     }
 
     private void makePopupDialog() {
