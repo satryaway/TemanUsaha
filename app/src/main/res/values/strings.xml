@@ -31,6 +31,11 @@
     <string name="set_profile_picture">Set Profile Picture</string>
     <string name="gender">Gender</string>
     <string name="status">Status</string>
+    <string name="minimum_two_char_error">This field should be filled with at least 2 characters</string>
+    <string name="should_not_be_empty_error">This field should not be empty</string>
+    <string name="email_validation_error">Please enter a valid email</string>
+    <string name="please_select_gender">Please select gender</string>
+    <string name="please_select_status">Please select status</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>

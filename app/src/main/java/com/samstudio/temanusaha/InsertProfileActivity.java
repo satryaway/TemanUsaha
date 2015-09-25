@@ -12,9 +12,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.samstudio.temanusaha.util.Utility;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.File;
@@ -30,6 +35,12 @@ import java.lang.reflect.Method;
  */
 public class InsertProfileActivity extends AppCompatActivity {
     private ImageView profilePictureIV;
+    private EditText firstNameET, lastNameET, placeOfBirthET, dateOfBirthET, idCardNumberET, expiredIdET,
+        emailET, addressET, phoneNumberET;
+    private RadioGroup genderRG, statusRG;
+    private RadioButton maleRB, femaleRB, marriedRB, singleRB;
+    private Button saveBtn;
+    private boolean isFormCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,32 +49,25 @@ public class InsertProfileActivity extends AppCompatActivity {
         setCallBack();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
-        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
-            beginCrop(result.getData());
-        } else if (requestCode == Crop.REQUEST_CROP) {
-            handleCrop(resultCode, result);
-        }
-    }
-
-    private void beginCrop(Uri source) {
-        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
-        Crop.of(source, destination).asSquare().start(this);
-    }
-
-    private void handleCrop(int resultCode, Intent result) {
-        if (resultCode == RESULT_OK) {
-            profilePictureIV.setImageBitmap(null);
-            profilePictureIV.setImageBitmap(setPic(Crop.getOutput(result)));
-        } else if (resultCode == Crop.RESULT_ERROR) {
-            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void initUI() {
         setContentView(R.layout.insert_profile_layout);
         profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
+        firstNameET = (EditText) findViewById(R.id.first_name_et);
+        lastNameET = (EditText) findViewById(R.id.last_name_et);
+        maleRB = (RadioButton) findViewById(R.id.male_rb);
+        femaleRB = (RadioButton) findViewById(R.id.female_rb);
+        placeOfBirthET = (EditText) findViewById(R.id.place_of_birth_et);
+        dateOfBirthET = (EditText) findViewById(R.id.date_of_birth_et);
+        idCardNumberET = (EditText) findViewById(R.id.id_card_et);
+        expiredIdET = (EditText) findViewById(R.id.expired_id_et);
+        emailET = (EditText) findViewById(R.id.email_et);
+        addressET = (EditText) findViewById(R.id.address_et);
+        phoneNumberET = (EditText) findViewById(R.id.phone_number_et);
+        marriedRB = (RadioButton) findViewById(R.id.married_rb);
+        singleRB = (RadioButton) findViewById(R.id.single_rb);
+        saveBtn = (Button) findViewById(R.id.save_btn);
+        maleRB.setChecked(true);
+        marriedRB.setChecked(true);
     }
 
     private void setCallBack() {
@@ -73,6 +77,65 @@ public class InsertProfileActivity extends AppCompatActivity {
                 makePopupDialog();
             }
         });
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isFormVerified()) {
+                    Toast.makeText(InsertProfileActivity.this, "Good Job", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private boolean isFormVerified() {
+        int filledFormTotal = 0;
+
+        if (firstNameET.getText().length() < 2)
+            firstNameET.setError(getString(R.string.minimum_two_char_error));
+        else
+            filledFormTotal++;
+
+        if (lastNameET.getText().length() < 2)
+            lastNameET.setError(getString(R.string.minimum_two_char_error));
+        else
+            filledFormTotal++;
+
+        if (placeOfBirthET.getText().length() == 0)
+            placeOfBirthET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (dateOfBirthET.getText().length() == 0)
+            dateOfBirthET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (phoneNumberET.getText().length() == 0)
+            phoneNumberET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (expiredIdET.getText().length() == 0)
+            expiredIdET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (!Utility.isEmailValid(emailET.getText().toString()))
+            emailET.setError(getString(R.string.email_validation_error));
+        else
+            filledFormTotal++;
+
+        if (addressET.getText().length() == 0)
+            addressET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (phoneNumberET.getText().length() == 0)
+            phoneNumberET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        return filledFormTotal == 9;
     }
 
     private void makePopupDialog() {
@@ -98,6 +161,29 @@ public class InsertProfileActivity extends AppCompatActivity {
         });
         final AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+            beginCrop(result.getData());
+        } else if (requestCode == Crop.REQUEST_CROP) {
+            handleCrop(resultCode, result);
+        }
+    }
+
+    private void beginCrop(Uri source) {
+        Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+        Crop.of(source, destination).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == RESULT_OK) {
+            profilePictureIV.setImageBitmap(null);
+            profilePictureIV.setImageBitmap(setPic(Crop.getOutput(result)));
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private Bitmap setPic(Uri uri) {
