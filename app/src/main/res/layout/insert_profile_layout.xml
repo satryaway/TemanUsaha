@@ -147,6 +147,13 @@
 
             <include layout="@layout/partial_insert_profile_layout" />
 
+            <ImageView
+                style="@style/wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/nothing" />
+
         </LinearLayout>
     </ScrollView>
 

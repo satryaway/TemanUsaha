@@ -88,7 +88,8 @@ public class InsertProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isFormVerified()) {
-                    Toast.makeText(InsertProfileActivity.this, "Good Job", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(InsertProfileActivity.this, PickShapeActivity.class);
+                    startActivity(intent);
                 }
             }
         });

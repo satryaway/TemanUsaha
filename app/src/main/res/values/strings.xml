@@ -36,6 +36,8 @@
     <string name="email_validation_error">Please enter a valid email</string>
     <string name="please_select_gender">Please select gender</string>
     <string name="please_select_status">Please select status</string>
+    <string name="get_loan">Get Loan</string>
+    <string name="choose_one_shape">Pilih salah satu gambar di bawah ini yang paling anda sukai</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>
