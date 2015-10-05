@@ -84,6 +84,7 @@
     <string name="time_range_4">3-5 Tahun</string>
     <string name="time_range_5">5-10 Tahun</string>
     <string name="time_range_6"><![CDATA[> 10 Tahun]]></string>
+    <string name="next">Next</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>
