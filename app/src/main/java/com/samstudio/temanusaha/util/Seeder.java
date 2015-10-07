@@ -5,6 +5,7 @@ import android.content.Context;
 import com.samstudio.temanusaha.R;
 import com.samstudio.temanusaha.entities.CreditCeiling;
 import com.samstudio.temanusaha.entities.CreditPurpose;
+import com.samstudio.temanusaha.entities.Partner;
 import com.samstudio.temanusaha.entities.TimeRange;
 
 import java.util.ArrayList;
@@ -147,5 +148,15 @@ public class Seeder {
         return stringList;
     }
 
+    public static List<Partner> getPartners() {
+        List<Partner> partnerList = new ArrayList<>();
+
+        partnerList.add(new Partner(1, "Ariel Tatum", "PT. Bank Rakyat Indonesia", -6.896923, 107.614888));
+        partnerList.add(new Partner(2, "Channing Tatum", "PT. Bank Negeri", -6.917464, 107.619123));
+        partnerList.add(new Partner(3, "Jacob Blazcskowsky", "PT. Mandiri", -6.759638, 107.609781));
+        partnerList.add(new Partner(4, "Didier Armando", "PT. Mitra Kukar", -6.943438, 107.646983));
+
+        return partnerList;
+    }
 
 }
