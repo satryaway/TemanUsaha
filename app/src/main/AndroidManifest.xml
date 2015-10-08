@@ -25,7 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".ShowMapActivity">
+        <activity android:name=".CountDownActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -38,6 +38,7 @@
         <activity android:name=".InsertProfileActivity" />
         <activity android:name=".PickShapeActivity" />
         <activity android:name=".RegisterProfileActivity" />
+        <activity android:name=".ShowMapActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <!-- Goolge API Key -->

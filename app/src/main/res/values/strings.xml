@@ -85,6 +85,9 @@
     <string name="time_range_5">5-10 Tahun</string>
     <string name="time_range_6"><![CDATA[> 10 Tahun]]></string>
     <string name="next">Next</string>
+    <string name="wait_for_grabber_text">Your application has been sent please wait for a few minute until your application to grab by partner</string>
+    <string name="default_count_down_timer">09 : 50</string>
+    <string name="cancel">Cancel</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>
