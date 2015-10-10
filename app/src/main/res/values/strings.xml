@@ -93,6 +93,8 @@
     <string name="default_pt_name">PT. Satria Cipta Solusi</string>
     <string name="default_kcp_name">KCP Cihampelas</string>
     <string name="default_pt_strength">Proses ACC cepat, kredit murah, jangka waktu flexible</string>
+    <string name="your_loan_app_has_been_sent">Your loan application has been sent</string>
+    <string name="app_will_be_verified">Application will be verified \nCheck application status</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>
