@@ -4,37 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/top_bar_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/blue_app">
-
-        <ImageView
-            android:id="@+id/option_menu_iv"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:contentDescription="@string/nothing"
-            android:src="@drawable/ic_white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/imageView"
-            android:layout_toStartOf="@+id/imageView"
-            android:text="@string/get_loan"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+    <include layout="@layout/topbar_wrapper" />
 
     <TextView
         android:id="@+id/instruction_tv"
