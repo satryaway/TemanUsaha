@@ -5,16 +5,19 @@ package com.samstudio.temanusaha.entities;
  * model for partner
  */
 public class Partner {
-    private int id;
-    private String name, company;
+    private int id, status;
+    private String name, company, date, imgURL, phoneNumber;
     private double lat, lng;
 
-    public Partner(int id, String name, String company, double lat, double lng) {
+    public Partner(int id, String name, String company, double lat, double lng, int status) {
         this.id = id;
         this.name = name;
         this.company = company;
         this.lat = lat;
         this.lng = lng;
+        this.status = status;
+        this.date = "27 Agustus 2015 10:00";
+        this.phoneNumber = "089696296962";
     }
 
     public int getId() {
@@ -55,5 +58,37 @@ public class Partner {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

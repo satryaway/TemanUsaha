@@ -5,6 +5,7 @@
         android:name="com.samstudio.temanusaha.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.samstudio.temanusaha.permission.MAPS_RECEIVE" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -21,11 +22,11 @@
         android:required="true" />
 
     <application
-        android:allowBackup="true"
+        android:name="com.samstudio.temanusaha.TemanUsahaApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeliveryDataConfirmationActivity">
+        <activity android:name=".AppStatusActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -42,6 +43,9 @@
         <activity android:name=".CountDownActivity" />
         <activity android:name=".PartnerConfirmationActivity" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+        <activity android:name=".DeliveryDataConfirmationActivity" />
+        <activity android:name=".AdministrationProcessActivity" />
+        <activity android:name=".MeetUpProcessActivity" />
 
         <!-- Goolge API Key -->
         <meta-data

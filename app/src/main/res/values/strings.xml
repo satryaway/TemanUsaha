@@ -95,6 +95,16 @@
     <string name="default_pt_strength">Proses ACC cepat, kredit murah, jangka waktu flexible</string>
     <string name="your_loan_app_has_been_sent">Your loan application has been sent</string>
     <string name="app_will_be_verified">Application will be verified \nCheck application status</string>
+    <string name="default_app_status">Administration Process</string>
+    <string name="application_status">Application Status</string>
+    <string name="administration_process">Administration Process</string>
+    <string name="meet_up_process">Meet Up Process</string>
+    <string name="waiting_for_approval">Waiting for Approval</string>
+    <string name="approved">Approved</string>
+    <string name="rejected">Rejected</string>
+    <string name="please_wait_up_to_date">Please Wait \nUp to Date</string>
+    <string name="default_date">27 Agustus 2015</string>
+    <string name="please_wait_on">Please Wait \nOn</string>
     <string-array name="set_picture_item">
         <item>Browse Image from Library</item>
         <item>Take Picture</item>
