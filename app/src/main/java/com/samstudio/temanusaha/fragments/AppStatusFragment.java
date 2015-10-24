@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.samstudio.temanusaha.AdministrationProcessActivity;
 import com.samstudio.temanusaha.MeetUpProcessActivity;
 import com.samstudio.temanusaha.R;
+import com.samstudio.temanusaha.WaitingForApprovalActivity;
 import com.samstudio.temanusaha.adapters.AppStatusListAdapter;
 import com.samstudio.temanusaha.entities.Partner;
 import com.samstudio.temanusaha.util.CommonConstants;
@@ -71,7 +72,8 @@ public class AppStatusFragment extends Fragment {
                         intent.putExtra(CommonConstants.PHONE_NUMBER, partnerList.get(position).getPhoneNumber());
                         break;
                     default:
-                        intent = new Intent(getActivity(), AdministrationProcessActivity.class);
+                        intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
+                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
                         break;
                 }
 
