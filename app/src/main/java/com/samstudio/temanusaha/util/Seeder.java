@@ -159,4 +159,14 @@ public class Seeder {
         return partnerList;
     }
 
+    public static List<Partner> getPartnersWithResult() {
+        List<Partner> partnerList = new ArrayList<>();
+
+        partnerList.add(new Partner(5, "Channing Totem", "PT. Bank Negara Indonesia", -6.896923, 107.614898, 4));
+        partnerList.add(new Partner(6, "Hazard", "PT. Mandiri", -6.917564, 107.613123, 4));
+        partnerList.add(new Partner(7, "Shelly Elle Wood", "PT. Mega", -6.917454, 107.619113, 5));
+
+        return partnerList;
+    }
+
 }

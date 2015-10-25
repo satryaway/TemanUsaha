@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.samstudio.temanusaha.AdministrationProcessActivity;
+import com.samstudio.temanusaha.AppApprovedActivity;
+import com.samstudio.temanusaha.AppRejectedActivity;
 import com.samstudio.temanusaha.MeetUpProcessActivity;
 import com.samstudio.temanusaha.R;
 import com.samstudio.temanusaha.WaitingForApprovalActivity;
@@ -30,6 +32,7 @@ public class AppStatusFragment extends Fragment {
     private static String POSITION_ARG = "POSITION";
     private ListView listView;
     private AppStatusListAdapter listAdapter;
+    private int position;
     private List<Partner> partnerList = new ArrayList<>();
 
     public static AppStatusFragment newInstance(int position) {
@@ -43,6 +46,7 @@ public class AppStatusFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        position = getArguments().getInt(POSITION_ARG);
         view = inflater.inflate(R.layout.app_status_fragment_layout, null);
         initUI();
         setCallBack();
@@ -71,6 +75,16 @@ public class AppStatusFragment extends Fragment {
                         intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
                         intent.putExtra(CommonConstants.PHONE_NUMBER, partnerList.get(position).getPhoneNumber());
                         break;
+
+                    case 4:
+                        intent = new Intent(getActivity(), AppApprovedActivity.class);
+                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
+                        break;
+
+                    case 5:
+                        intent = new Intent(getActivity(), AppRejectedActivity.class);
+                        break;
+
                     default:
                         intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
                         intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
@@ -87,7 +101,7 @@ public class AppStatusFragment extends Fragment {
     }
 
     private void getData() {
-        partnerList = Seeder.getPartners();
+        partnerList = position == 0 ? Seeder.getPartners() : Seeder.getPartnersWithResult();
         listAdapter.update(partnerList);
     }
 }

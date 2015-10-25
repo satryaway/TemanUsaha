@@ -63,6 +63,8 @@
         <activity android:name=".Main" />
         <activity android:name=".GetIntent" />
         <activity android:name=".WaitingForApprovalActivity" />
+        <activity android:name=".AppApprovedActivity" />
+        <activity android:name=".AppRejectedActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

@@ -16,8 +16,9 @@
         app:pstsShouldExpand="true"
         app:pstsTabPaddingLeftRight="14dp"
         app:pstsTextAllCaps="true"
-        app:pstsUnderlineColor="@null"
+        app:pstsUnderlineColor="@color/white"
         app:pstsUnderlineHeight="0dp"
+        app:pstsIndicatorColor="@color/white"
         />
 
     <android.support.v4.view.ViewPager
