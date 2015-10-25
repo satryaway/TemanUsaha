@@ -128,4 +128,10 @@
     <string name="sorry">Sorry!!</string>
     <string name="app_rejected">Your application \nhas been rejected</string>
     <string name="please_submit_app_again">Please submit \nyour application again</string>
+    <string name="partner">Partner</string>
+    <string name="customer">Customer</string>
+    <string name="input_email_and_password">Masukkan email dan password!</string>
+    <string name="login_succeed_text">You have successfully logged in</string>
+    <string name="login_failed_text">Username and password didn\'t match</string>
+    <string name="please_wait">Please wait...</string>
 </resources>

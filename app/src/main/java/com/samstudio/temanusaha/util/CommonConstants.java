@@ -9,4 +9,13 @@ public class CommonConstants {
     public static String SHAPE_CODE = "shape_code";
     public static String DATE = "DATE";
     public static String PHONE_NUMBER = "PHONE_NUMBER";
+    public static String STATUS = "status";
+    public static String EMAIL = "email";
+    public static String PASSWORD = "password";
+    public static int STATUS_OK = 1;
+    public static String BASE_URL = "http://temanusaha.com/";
+    public static String SERVICE_LOGIN_CUSTOMER = BASE_URL + "doLogin/user";
+    public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
+    public static String TYPE = "type";
+    public static String RETURN_DATA = "return_data";
 }

@@ -28,4 +28,8 @@ public class TemanUsahaApplication extends Application {
     public SharedPreferences getSharedPreferences(){
         return preferences;
     }
+
+    public boolean isCustomer() {
+        return getSharedPreferences().getBoolean(CommonConstants.TYPE, true);
+    }
 }
