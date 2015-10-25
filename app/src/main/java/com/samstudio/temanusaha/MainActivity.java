@@ -16,18 +16,21 @@ import android.widget.PopupMenu;
 public class MainActivity extends AppCompatActivity {
     private ImageView optionMenuIV, profileIV;
     private Context context = MainActivity.this;
+    private ImageView grabIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initUI();
         setCallback();
+        putData();
     }
 
     private void initUI() {
         setContentView(R.layout.main_layout);
         optionMenuIV = (ImageView) findViewById(R.id.option_menu_iv);
         profileIV = (ImageView) findViewById(R.id.profile_iv);
+        grabIV = (ImageView) findViewById(R.id.grab_iv);
     }
 
     private void setCallback() {
@@ -65,5 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, InsertProfileActivity.class));
             }
         });
+    }
+
+    private void putData() {
+        if(!TemanUsahaApplication.getInstance().isCustomer()) {
+            grabIV.setImageResource(R.drawable.get_cust);
+        }
     }
 }

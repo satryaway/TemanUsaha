@@ -90,12 +90,15 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/grab_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/menu_wrapper"
         android:contentDescription="@string/nothing"
-        android:paddingLeft="100dp"
-        android:paddingRight="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/get_loan" />
 
     <include layout="@layout/bottom_bar_wrapper" />

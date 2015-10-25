@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                 saveDataInPreferences(jsonObject.getJSONObject(CommonConstants.RETURN_DATA));
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, R.string.login_failed_text, Toast.LENGTH_SHORT).show();
                             }
