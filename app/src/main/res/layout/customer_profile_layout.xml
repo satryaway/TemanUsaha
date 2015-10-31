@@ -145,7 +145,7 @@
                 android:editable="false"
                 android:inputType="date" />
 
-            <include layout="@layout/partial_insert_profile_layout" />
+            <include layout="@layout/partial_customer_profile_layout" />
 
             <ImageView
                 style="@style/wrap_content"

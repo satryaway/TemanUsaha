@@ -18,7 +18,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.samstudio.temanusaha.util.Utility;
@@ -35,7 +34,7 @@ import java.lang.reflect.Method;
  * Created by satryaway on 9/17/2015.
  * activity to input profile
  */
-public class InsertProfileActivity extends AppCompatActivity {
+public class PartnerProfileActivity extends AppCompatActivity {
     private ImageView profilePictureIV;
     private EditText firstNameET, lastNameET, placeOfBirthET, dateOfBirthET, idCardNumberET, expiredIdET,
             emailET, addressET, phoneNumberET;
@@ -43,6 +42,10 @@ public class InsertProfileActivity extends AppCompatActivity {
     private Button saveBtn;
     private boolean isPickDateOfBirth;
     private DatePickerDialog datePickerDialog;
+    private RadioButton hundredMillionRB;
+    private EditText kantorCabangET;
+    private EditText perusahaanET;
+    private EditText companyStrengthET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,7 @@ public class InsertProfileActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        setContentView(R.layout.insert_profile_layout);
+        setContentView(R.layout.partner_profile_layout);
         profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
         firstNameET = (EditText) findViewById(R.id.first_name_et);
         lastNameET = (EditText) findViewById(R.id.last_name_et);
@@ -60,19 +63,17 @@ public class InsertProfileActivity extends AppCompatActivity {
         femaleRB = (RadioButton) findViewById(R.id.female_rb);
         placeOfBirthET = (EditText) findViewById(R.id.place_of_birth_et);
         dateOfBirthET = (EditText) findViewById(R.id.date_of_birth_et);
-        idCardNumberET = (EditText) findViewById(R.id.id_card_et);
-        expiredIdET = (EditText) findViewById(R.id.expired_id_et);
+        perusahaanET = (EditText) findViewById(R.id.perusahaan_et);
+        kantorCabangET = (EditText) findViewById(R.id.kantor_cabang_et);
+        companyStrengthET = (EditText) findViewById(R.id.company_strength_et);
         emailET = (EditText) findViewById(R.id.email_et);
-        addressET = (EditText) findViewById(R.id.address_et);
         phoneNumberET = (EditText) findViewById(R.id.phone_number_et);
-        marriedRB = (RadioButton) findViewById(R.id.married_rb);
-        singleRB = (RadioButton) findViewById(R.id.single_rb);
+        hundredMillionRB = (RadioButton) findViewById(R.id.hundred_million_rb);
         saveBtn = (Button) findViewById(R.id.save_btn);
         maleRB.setChecked(true);
-        marriedRB.setChecked(true);
+        hundredMillionRB.setChecked(true);
 
         dateOfBirthET.setFocusable(false);
-        expiredIdET.setFocusable(false);
         datePickerDialog = new DatePickerDialog(this, dateListener, 1990, 1, 1);
     }
 
@@ -88,7 +89,8 @@ public class InsertProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isFormVerified()) {
-                    Intent intent = new Intent(InsertProfileActivity.this, PickShapeActivity.class);
+                    Intent intent = new Intent(PartnerProfileActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
             }
@@ -98,14 +100,6 @@ public class InsertProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isPickDateOfBirth = true;
-                datePickerDialog.show();
-            }
-        });
-
-        expiredIdET.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isPickDateOfBirth = false;
                 datePickerDialog.show();
             }
         });
@@ -121,10 +115,7 @@ public class InsertProfileActivity extends AppCompatActivity {
     private void showDate(int year, int month, int day) {
         String fixedMonth = month < 10 ? "0" + month : "" + month;
         String fixedDay = day < 10 ? "0" + day : "" + day;
-        if (isPickDateOfBirth)
-            dateOfBirthET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
-        else
-            expiredIdET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
+        dateOfBirthET.setText(new StringBuilder().append(year).append("-").append(fixedMonth).append("-").append(fixedDay));
     }
 
 
@@ -151,18 +142,23 @@ public class InsertProfileActivity extends AppCompatActivity {
         else
             filledFormTotal++;
 
-        if (idCardNumberET.getText().length() == 0)
-            idCardNumberET.setError(getString(R.string.should_not_be_empty_error));
-        else
-            filledFormTotal++;
-
         if (phoneNumberET.getText().length() == 0)
             phoneNumberET.setError(getString(R.string.should_not_be_empty_error));
         else
             filledFormTotal++;
 
-        if (expiredIdET.getText().length() == 0)
-            expiredIdET.setError(getString(R.string.should_not_be_empty_error));
+        if (perusahaanET.getText().length() == 0)
+            perusahaanET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (kantorCabangET.getText().length() == 0)
+            kantorCabangET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (companyStrengthET.getText().length() == 0)
+            companyStrengthET.setError(getString(R.string.should_not_be_empty_error));
         else
             filledFormTotal++;
 
@@ -171,23 +167,13 @@ public class InsertProfileActivity extends AppCompatActivity {
         else
             filledFormTotal++;
 
-        if (addressET.getText().length() == 0)
-            addressET.setError(getString(R.string.should_not_be_empty_error));
-        else
-            filledFormTotal++;
-
-        if (phoneNumberET.getText().length() == 0)
-            phoneNumberET.setError(getString(R.string.should_not_be_empty_error));
-        else
-            filledFormTotal++;
-
-        return filledFormTotal == 10;
+        return filledFormTotal == 9;
     }
 
     private void makePopupDialog() {
         final String[] option = getResources().getStringArray(R.array.set_picture_item);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(InsertProfileActivity.this, android.R.layout.select_dialog_item, option);
-        AlertDialog.Builder builder = new AlertDialog.Builder(InsertProfileActivity.this);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(PartnerProfileActivity.this, android.R.layout.select_dialog_item, option);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PartnerProfileActivity.this);
 
         builder.setTitle(R.string.set_profile_picture);
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
@@ -196,7 +182,7 @@ public class InsertProfileActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 switch (which) {
                     case 0:
-                        Crop.pickImage(InsertProfileActivity.this);
+                        Crop.pickImage(PartnerProfileActivity.this);
                         break;
                     default:
                         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");

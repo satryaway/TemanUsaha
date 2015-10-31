@@ -40,7 +40,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreen">
+        <activity android:name=".PartnerProfileActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -50,7 +50,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".TermsActivity" />
         <activity android:name=".ChangePasswordActivity" />
-        <activity android:name=".InsertProfileActivity" />
+        <activity android:name=".CustomerProfileActivity" />
         <activity android:name=".PickShapeActivity" />
         <activity android:name=".RegisterProfileActivity" />
         <activity android:name=".ShowMapActivity" />

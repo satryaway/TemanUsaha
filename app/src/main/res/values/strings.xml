@@ -133,5 +133,11 @@
     <string name="input_email_and_password">Masukkan email dan password!</string>
     <string name="login_succeed_text">You have successfully logged in</string>
     <string name="login_failed_text">Username and password didn\'t match</string>
-    <string name="please_wait">Please wait...</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="perusahaan">Perusahaan</string>
+    <string name="kantor_cabang">Kantor Cabang</string>
+    <string name="segment_loan">Segment Loan</string>
+    <string name="hundred_million_limit">0–100 Juta</string>
+    <string name="more_than_hundred_million"><![CDATA[> 100 Juta]]></string>
+    <string name="company_strength">Tuliskan kelebihan anda/perusahaan anda dibandingkan dengan rekan/perusahaan lainnya yang sejenis</string>
 </resources>
