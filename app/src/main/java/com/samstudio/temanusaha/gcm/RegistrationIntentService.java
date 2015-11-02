@@ -27,6 +27,8 @@ import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 import com.samstudio.temanusaha.R;
+import com.samstudio.temanusaha.TemanUsahaApplication;
+import com.samstudio.temanusaha.util.CommonConstants;
 
 import java.io.IOException;
 
@@ -41,7 +43,7 @@ public class RegistrationIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = TemanUsahaApplication.getInstance().getSharedPreferences();
 
         try {
             // [START register_for_gcm]
@@ -65,7 +67,8 @@ public class RegistrationIntentService extends IntentService {
             // You should store a boolean that indicates whether the generated token has been
             // sent to your server. If the boolean is false, send the token to your server,
             // otherwise your server should have already received the token.
-            sharedPreferences.edit().putBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, true).apply();
+            sharedPreferences.edit().putBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, true)
+                    .putString(CommonConstants.GCM_TOKEN, token).apply();
             // [END register_for_gcm]
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);

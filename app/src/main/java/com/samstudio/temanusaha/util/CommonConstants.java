@@ -18,4 +18,6 @@ public class CommonConstants {
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";
+    public static String GCM_TOKEN = "GCM_TOKEN";
+    public static String DEVICE_ID = "device_id";
 }

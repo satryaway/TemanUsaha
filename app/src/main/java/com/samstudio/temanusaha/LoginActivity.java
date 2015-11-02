@@ -31,13 +31,13 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private EditText emailET, passwordET;
-    private RadioButton customerRB;
     private String email, password;
-    private boolean isCustomer;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        token = TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.GCM_TOKEN, "");
         initUI();
         setCallBack();
     }
@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     private void initUI() {
         setContentView(R.layout.login_layout);
         loginBtn = (Button) findViewById(R.id.login_btn);
-        customerRB = (RadioButton) findViewById(R.id.customer_rb);
         emailET = (EditText) findViewById(R.id.email_et);
         passwordET = (EditText) findViewById(R.id.password_et);
     }
@@ -57,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (isFieldFilled()) {
                     email = emailET.getText().toString();
                     password = passwordET.getText().toString();
-                    isCustomer = customerRB.isChecked();
                     validateParameter();
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.input_email_and_password, Toast.LENGTH_SHORT).show();
@@ -67,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validateParameter() {
-        String url = isCustomer ? CommonConstants.SERVICE_LOGIN_CUSTOMER : CommonConstants.SERVICE_LOGIN_PARTNER;
+        String url =CommonConstants.SERVICE_LOGIN_CUSTOMER;
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         progressDialog.show();
@@ -105,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put(CommonConstants.EMAIL, email);
                 params.put(CommonConstants.PASSWORD, password);
+                params.put(CommonConstants.DEVICE_ID, token);
                 return params;
             }
         };
@@ -113,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void saveDataInPreferences(JSONObject jsonObject) {
         SharedPreferences.Editor editor = TemanUsahaApplication.getInstance().getSharedPreferences().edit();
-        editor.putBoolean(CommonConstants.TYPE, isCustomer);
         editor.apply();
     }
 

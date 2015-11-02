@@ -140,4 +140,5 @@
     <string name="hundred_million_limit">0–100 Juta</string>
     <string name="more_than_hundred_million"><![CDATA[> 100 Juta]]></string>
     <string name="company_strength">Tuliskan kelebihan anda/perusahaan anda dibandingkan dengan rekan/perusahaan lainnya yang sejenis</string>
+    <string name="common_error_msg">Something went wrong</string>
 </resources>
