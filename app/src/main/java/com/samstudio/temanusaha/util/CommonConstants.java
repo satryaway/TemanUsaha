@@ -16,8 +16,14 @@ public class CommonConstants {
     public static String BASE_URL = "http://temanusaha.com/";
     public static String SERVICE_LOGIN_CUSTOMER = BASE_URL + "doLogin/user";
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
+    public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";
     public static String GCM_TOKEN = "GCM_TOKEN";
     public static String DEVICE_ID = "device_id";
+    public static String FIRST_NAME = "first_name";
+    public static String LAST_NAME = "last_name";
+    public static String PASSWORD_CONFIRMATION = "password_confirmation";
+    public static String ID = "id";
+    public static String ROW_ID = "row_id";
 }

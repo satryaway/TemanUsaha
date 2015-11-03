@@ -141,4 +141,11 @@
     <string name="more_than_hundred_million"><![CDATA[> 100 Juta]]></string>
     <string name="company_strength">Tuliskan kelebihan anda/perusahaan anda dibandingkan dengan rekan/perusahaan lainnya yang sejenis</string>
     <string name="common_error_msg">Something went wrong</string>
+    <string name="name">Name</string>
+    <string name="confirmation_password">Confirmation Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="confirm_password_not_matched">Your confirmation password is not matched</string>
+    <string name="succeed">Succeed!</string>
+    <string name="failed">Failed!</string>
 </resources>

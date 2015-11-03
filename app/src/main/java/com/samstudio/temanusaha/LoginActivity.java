@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailET, passwordET;
     private String email, password;
     private String token;
+    private TextView signUpTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.login_btn);
         emailET = (EditText) findViewById(R.id.email_et);
         passwordET = (EditText) findViewById(R.id.password_et);
+        signUpTV = (TextView) findViewById(R.id.sign_up_tv);
     }
 
     private void setCallBack() {
@@ -60,6 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.input_email_and_password, Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        signUpTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
             }
         });
     }

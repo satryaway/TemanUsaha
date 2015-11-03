@@ -66,6 +66,7 @@
         <activity android:name=".AppApprovedActivity" />
         <activity android:name=".AppRejectedActivity" />
         <activity android:name=".AppStatusActivity" />
+        <activity android:name=".SignUpActivity" android:windowSoftInputMode="adjustPan" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

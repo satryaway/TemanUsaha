@@ -21,11 +21,36 @@
             android:layout_below="@+id/logo_iv"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/first_name_et"
+                    style="@style/default_edit_text_format"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:hint="@string/first_name"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/last_name_et"
+                    style="@style/default_edit_text_format"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:hint="@string/last_name"
+                    android:inputType="text" />
+            </LinearLayout>
+
+
             <EditText
                 android:id="@+id/email_et"
                 style="@style/default_edit_text_format"
                 android:hint="@string/username_or_email"
                 android:inputType="textEmailAddress" />
+
 
             <EditText
                 android:id="@+id/password_et"
@@ -33,41 +58,23 @@
                 android:hint="@string/password"
                 android:inputType="textPassword" />
 
+            <EditText
+                android:id="@+id/confirm_password_et"
+                style="@style/default_edit_text_format"
+                android:hint="@string/confirmation_password"
+                android:inputType="textPassword" />
+
             <Button
-                android:id="@+id/login_btn"
+                android:id="@+id/sign_up_btn"
                 style="@style/wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_corner_edittext"
-                android:text="@string/login"
+                android:text="@string/sign_up"
                 android:textColor="@color/blue_app"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dont_have_an_account"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/sign_up_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/sign_up"
-            android:textAllCaps="true"
-            android:textColor="@color/white" />
-    </LinearLayout>
 
 </RelativeLayout>
