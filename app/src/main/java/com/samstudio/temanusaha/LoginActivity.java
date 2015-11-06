@@ -90,9 +90,14 @@ public class LoginActivity extends AppCompatActivity {
                             if (status == CommonConstants.STATUS_OK) {
                                 Toast.makeText(LoginActivity.this, R.string.login_succeed_text, Toast.LENGTH_SHORT).show();
                                 saveDataInPreferences(jsonObject.getJSONObject(CommonConstants.RETURN_DATA));
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
+                                JSONObject object = jsonObject.getJSONObject(CommonConstants.RETURN_DATA);
+
+                                if (object.getString(CommonConstants.IS_UPDATED).equals("0")) {
+                                    startActivity(new Intent(LoginActivity.this, CustomerProfileActivity.class));
+                                } else {
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                }
+
                             } else {
                                 Toast.makeText(LoginActivity.this, R.string.login_failed_text, Toast.LENGTH_SHORT).show();
                             }
@@ -121,7 +126,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void saveDataInPreferences(JSONObject jsonObject) {
-        SharedPreferences.Editor editor = TemanUsahaApplication.getInstance().getSharedPreferences().edit();
+        SharedPreferences.Editor editor= TemanUsahaApplication.getInstance().getSharedPreferences().edit();
+
+        try {
+            editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ROW_ID));
+            editor.putString(CommonConstants.FIRST_NAME, jsonObject.getString(CommonConstants.FIRST_NAME));
+            editor.putString(CommonConstants.LAST_NAME, jsonObject.getString(CommonConstants.LAST_NAME));
+            editor.putString(CommonConstants.EMAIL, jsonObject.getString(CommonConstants.EMAIL));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         editor.apply();
     }
 
