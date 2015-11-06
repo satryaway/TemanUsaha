@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:showIn="@layout/insert_profile_layout">
+    tools:showIn="@layout/customer_profile_layout">
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,14 +87,5 @@
             android:layout_height="wrap_content"
             android:text="@string/single" />
     </RadioGroup>
-
-    <Button
-        android:id="@+id/save_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize="18sp"/>
 
 </merge>

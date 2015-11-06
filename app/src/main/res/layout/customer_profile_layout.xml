@@ -147,6 +147,19 @@
 
             <include layout="@layout/partial_customer_profile_layout" />
 
+            <include layout="@layout/job_data_layout" />
+
+            <include layout="@layout/expenses_data_layout" />
+
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"/>
+
             <ImageView
                 style="@style/wrap_content"
                 android:layout_marginTop="20dp"
