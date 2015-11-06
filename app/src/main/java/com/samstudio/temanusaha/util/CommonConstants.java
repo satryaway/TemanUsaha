@@ -26,4 +26,20 @@ public class CommonConstants {
     public static String PASSWORD_CONFIRMATION = "password_confirmation";
     public static String ID = "id";
     public static String ROW_ID = "row_id";
+    public static String IS_UPDATED = "is_updated";
+    public static String MALE = "male";
+    public static String GENDER = "gender";
+    public static String DATE_OF_BIRTH = "date_of_birth";
+    public static String ID_CARD_NUMBER = "id_card_number";
+    public static String ID_CARD_EXP_DATE = "id_card_exp_date";
+    public static String ADDRESS = "address";
+    public static String SUB_DISTRICT  = "sub_district";
+    public static String DISTRICT = "district";
+    public static String CITY = "city";
+    public static String PROVINCE = "province";
+    public static String PROFILE_PICTURE = "profile_picture";
+    public static String PHONE = "phone";
+    public static String MARITAL_STATUS = "marital_status";
+    public static String SINGLE = "single";
+    public static String PLACE_OF_BIRTH = "place_of_birth";
 }

@@ -148,4 +148,5 @@
     <string name="confirm_password_not_matched">Your confirmation password is not matched</string>
     <string name="succeed">Succeed!</string>
     <string name="failed">Failed!</string>
+    <string name="null_picture_error">Please provide profile picture</string>
 </resources>
