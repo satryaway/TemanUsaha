@@ -153,4 +153,6 @@
     <string name="omzet_perbulan">Omzet Perbulan</string>
     <string name="harga_pokok_pembelian">Harga Pokok Pembelian/Modal Perbulan</string>
     <string name="upah_tenaga_kerja">Upah Tenaga Kerja</string>
+    <string name="karyawan">Karyawan</string>
+    <string name="wiraswasta">Wiraswasta</string>
 </resources>

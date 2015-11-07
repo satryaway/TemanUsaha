@@ -2,7 +2,6 @@ package com.samstudio.temanusaha;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,25 +13,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.samstudio.temanusaha.util.APIAgent;
 import com.samstudio.temanusaha.util.CommonConstants;
 import com.samstudio.temanusaha.util.Utility;
 import com.soundcloud.android.crop.Crop;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,8 +40,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import cz.msebera.android.httpclient.Header;
-
 /**
  * Created by satryaway on 9/17/2015.
  * activity to input profile
@@ -53,12 +48,18 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private ImageView profilePictureIV;
     private EditText firstNameET, lastNameET, placeOfBirthET, dateOfBirthET, idCardNumberET, expiredIdET,
             emailET, addressET, phoneNumberET;
-    private RadioButton maleRB, femaleRB, marriedRB, singleRB;
+    private RadioButton maleRB, femaleRB, marriedRB, singleRB, employeeRB;
     private Button saveBtn;
     private boolean isPickDateOfBirth;
     private DatePickerDialog datePickerDialog;
     private SharedPreferences sharedPreferences;
     private File userImageFile = null;
+    private TextView jobPositionTV, monthlyIncomeTV, educationExpensesTV;
+    private TextView transportExpensesTV, companyAddressTV, monthlyAssetTV;
+    private TextView employeeWageTV;
+    private EditText companyNameET, workSinceET, jobPositionET, monthlyIncomeET, educationExpensesET, householdExpensesET;
+    private EditText transportExpensesET, waterAndElectricyExpensesET, miscExpensesET, companyAddressET, monthlyAssetET;
+    private EditText employeeWageET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,32 @@ public class CustomerProfileActivity extends AppCompatActivity {
         maleRB.setChecked(true);
         marriedRB.setChecked(true);
 
+        jobPositionTV = (TextView) findViewById(R.id.job_position_tv);
+        monthlyIncomeTV = (TextView) findViewById(R.id.monthly_income_tv);
+        educationExpensesTV = (TextView) findViewById(R.id.education_expenses_tv);
+        transportExpensesTV = (TextView) findViewById(R.id.transport_expenses_tv);
+        companyAddressTV = (TextView) findViewById(R.id.company_address_tv);
+        monthlyAssetTV = (TextView) findViewById(R.id.monthly_asset_tv);
+        employeeWageTV = (TextView) findViewById(R.id.employee_wage_tv);
+
+        companyNameET = (EditText) findViewById(R.id.company_name_et);
+        workSinceET = (EditText) findViewById(R.id.work_since_et);
+        jobPositionET = (EditText) findViewById(R.id.job_position_et);
+        monthlyIncomeET = (EditText) findViewById(R.id.monthly_income_et);
+        educationExpensesET = (EditText) findViewById(R.id.education_expenses_et);
+        householdExpensesET = (EditText) findViewById(R.id.household_expenses_et);
+        transportExpensesET = (EditText) findViewById(R.id.transport_expenses_et);
+        waterAndElectricyExpensesET = (EditText) findViewById(R.id.water_and_electricy_expenses_et);
+        miscExpensesET = (EditText) findViewById(R.id.misc_expenses_et);
+        companyAddressET = (EditText) findViewById(R.id.company_address_et);
+        monthlyAssetET = (EditText) findViewById(R.id.monthly_asset_et);
+        employeeWageET = (EditText) findViewById(R.id.employee_wage_et);
+
+        employeeRB = (RadioButton) findViewById(R.id.employee_rb);
+
+        employeeRB.setChecked(true);
+        showFields(true);
+
         dateOfBirthET.setFocusable(false);
         expiredIdET.setFocusable(false);
         datePickerDialog = new DatePickerDialog(this, dateListener, 1990, 1, 1);
@@ -101,6 +128,13 @@ public class CustomerProfileActivity extends AppCompatActivity {
             }
         });
 
+        employeeRB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                showFields(isChecked);
+            }
+        });
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +142,41 @@ public class CustomerProfileActivity extends AppCompatActivity {
                     Intent intent = new Intent(CustomerProfileActivity.this, PickShapeActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+
+        monthlyIncomeET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    monthlyIncomeET.setText(addCommaToCurrency(value).reverse());
+                    monthlyIncomeET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
             }
         });
 
@@ -126,6 +195,38 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+    }
+
+    private StringBuilder addCommaToCurrency(String value) {
+        String reverseValue = new StringBuilder(value).reverse()
+                .toString();
+        StringBuilder finalValue = new StringBuilder();
+        for (int i = 1; i <= reverseValue.length(); i++) {
+            char val = reverseValue.charAt(i - 1);
+            finalValue.append(val);
+            if (i % 3 == 0 && i != reverseValue.length() && i > 0) {
+                finalValue.append(",");
+            }
+        }
+
+        return finalValue;
+    }
+
+    private void showFields(boolean isChecked) {
+        companyAddressTV.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        companyAddressET.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        monthlyIncomeTV.setText(isChecked ? R.string.gaji_perbulan : R.string.omzet_perbulan);
+        monthlyIncomeET.setHint(isChecked ? R.string.gaji_perbulan : R.string.omzet_perbulan);
+        monthlyAssetTV.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        monthlyAssetET.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        employeeWageTV.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        employeeWageET.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+        jobPositionTV.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        jobPositionET.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        educationExpensesTV.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        educationExpensesET.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        transportExpensesTV.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+        transportExpensesET.setVisibility(isChecked ? View.VISIBLE : View.GONE);
     }
 
     private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {

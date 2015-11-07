@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
     android:orientation="vertical"
-    android:layout_marginTop="10dp"
     tools:showIn="@layout/customer_profile_layout">
 
 
@@ -30,13 +30,13 @@
                 android:id="@+id/employee_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/married" />
+                android:text="@string/karyawan" />
 
             <RadioButton
                 android:id="@+id/entrepreneur_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/single" />
+                android:text="@string/wiraswasta" />
         </RadioGroup>
     </LinearLayout>
 
@@ -52,7 +52,8 @@
         android:id="@+id/company_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/nama_perusahaan" />
+        android:hint="@string/nama_perusahaan"
+        android:inputType="text" />
 
     <TextView
         android:id="@+id/work_since_tv"
@@ -66,7 +67,8 @@
         android:id="@+id/work_since_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/sejak_tahun" />
+        android:hint="@string/sejak_tahun"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/company_address_tv"
@@ -83,6 +85,21 @@
         android:hint="@string/alamat_perusahaan" />
 
     <TextView
+        android:id="@+id/job_position_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/jabatan"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/job_position_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/jabatan"
+        android:inputType="text" />
+
+    <TextView
         android:id="@+id/monthly_income_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,7 +111,8 @@
         android:id="@+id/monthly_income_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/omzet_perbulan" />
+        android:hint="@string/omzet_perbulan"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/monthly_asset_tv"
@@ -108,7 +126,8 @@
         android:id="@+id/monthly_asset_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/harga_pokok_pembelian" />
+        android:hint="@string/harga_pokok_pembelian"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/employee_wage_tv"
@@ -122,21 +141,8 @@
         android:id="@+id/employee_wage_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/upah_tenaga_kerja" />
-
-    <TextView
-        android:id="@+id/job_position_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/jabatan"
-        android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/job_position_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/jabatan" />
+        android:hint="@string/upah_tenaga_kerja"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/education_expenses_tv"
@@ -147,12 +153,14 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/education_expenses_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biaya_pendidikan_perbulan"
         android:inputType="number" />
 
     <TextView
+        android:id="@+id/household_expenses_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -160,12 +168,14 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/household_expenses_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biaya_rumah_tangga_perbulan"
         android:inputType="number" />
 
     <TextView
+        android:id="@+id/transport_expenses_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -173,12 +183,14 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/transport_expenses_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biaya_transport_perbulan"
         android:inputType="number" />
 
     <TextView
+        android:id="@+id/water_and_electricy_expenses_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -186,12 +198,14 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/water_and_electricy_expenses_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biaya_listrik_dan_air"
         android:inputType="number" />
 
     <TextView
+        android:id="@+id/misc_expenses_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -199,6 +213,7 @@
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/misc_expenses_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/biaya_lain_lain"
