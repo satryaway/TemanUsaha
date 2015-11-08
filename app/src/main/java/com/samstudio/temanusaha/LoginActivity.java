@@ -119,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                 params.put(CommonConstants.EMAIL, email);
                 params.put(CommonConstants.PASSWORD, password);
                 params.put(CommonConstants.DEVICE_ID, token);
+                params.put(CommonConstants.LATITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LATITUDE, "0.0"));
+                params.put(CommonConstants.LONGITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
                 return params;
             }
         };

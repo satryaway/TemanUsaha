@@ -155,4 +155,8 @@
     <string name="upah_tenaga_kerja">Upah Tenaga Kerja</string>
     <string name="karyawan">Karyawan</string>
     <string name="wiraswasta">Wiraswasta</string>
+    <string name="RTO">Request Timed Out</string>
+    <string name="SERVER_ERROR">Server Error</string>
+    <string name="profile_updated">Your profile has successfully updated</string>
+    <string name="location_error">Cannot find your location</string>
 </resources>

@@ -17,6 +17,8 @@ public class CommonConstants {
     public static String SERVICE_LOGIN_CUSTOMER = BASE_URL + "doLogin/user";
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
     public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
+    public static String SERVICE_UPDATE_USER_PROFILE = BASE_URL + "doModify/user";
+    public static String PLACE_OF_BIRTH = "place_of_birth";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";
     public static String GCM_TOKEN = "GCM_TOKEN";
@@ -41,5 +43,25 @@ public class CommonConstants {
     public static String PHONE = "phone";
     public static String MARITAL_STATUS = "marital_status";
     public static String SINGLE = "single";
-    public static String PLACE_OF_BIRTH = "place_of_birth";
+    public static String FEMALE = "female";
+    public static String MARRIED = "married";
+    public static String EMPLOYEE = "employee";
+    public static String ENTREPRENEUR = "entrepreneur";
+    public static String JOB = "job";
+    public static String COMPANY_ADDRESS = "company_address";
+    public static String JOB_POSITION = "job_position";
+    public static String WORK_SINCE = "work_since";
+    public static String MONTHLY_INCOME = "monthly_income";
+    public static String EDUCATION_EXPENSES = "education_expenses";
+    public static String HOUSEHOLD_EXPENSES = "household_expenses";
+    public static String TRANSPORTATION_EXPENSES = "transportation_expenses";
+    public static String WATER_ELECTRICITY_EXPENSES = "water_electricity_expenses";
+    public static String MISC_EXPENSES = "misc_expenses";
+    public static String MONTHLY_ASSETS = "monthly_assets";
+    public static String EMPLOYEE_WAGE = "employee_wage";
+    public static String LATITUDE = "latitude";
+    public static String LONGITUDE = "longitude";
+    public static String COMPANY_NAME = "company_name";
+    public static int GPS_CODE = 69;
+    public static String SERVICE_PROFILE_PIC = "http://temanusaha.com/images/profile_pictures/users/";
 }

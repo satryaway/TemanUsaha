@@ -101,6 +101,8 @@ public class SignUpActivity extends Activity {
                 params.put(CommonConstants.PASSWORD, passwordET.getText().toString());
                 params.put(CommonConstants.PASSWORD_CONFIRMATION, confirmPasswordET.getText().toString());
                 params.put(CommonConstants.DEVICE_ID, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.GCM_TOKEN, ""));
+                params.put(CommonConstants.LATITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LATITUDE, "0.0"));
+                params.put(CommonConstants.LONGITUDE, TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
                 return params;
             }
         };
