@@ -2,6 +2,7 @@ package com.samstudio.temanusaha;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,9 +28,16 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.samstudio.temanusaha.util.APIAgent;
 import com.samstudio.temanusaha.util.CommonConstants;
+import com.samstudio.temanusaha.util.UniversalImageLoader;
 import com.samstudio.temanusaha.util.Utility;
 import com.soundcloud.android.crop.Crop;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +47,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by satryaway on 9/17/2015.
@@ -60,10 +70,14 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private EditText companyNameET, workSinceET, jobPositionET, monthlyIncomeET, educationExpensesET, householdExpensesET;
     private EditText transportExpensesET, waterAndElectricyExpensesET, miscExpensesET, companyAddressET, monthlyAssetET;
     private EditText employeeWageET;
+    private RadioButton entrepreneurRB;
+    private UniversalImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imageLoader = new UniversalImageLoader(this);
+        imageLoader.initImageLoader();
         initUI();
         setCallBack();
         putData();
@@ -111,6 +125,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
         employeeWageET = (EditText) findViewById(R.id.employee_wage_et);
 
         employeeRB = (RadioButton) findViewById(R.id.employee_rb);
+        entrepreneurRB = (RadioButton) findViewById(R.id.entrepreneur_rb);
 
         employeeRB.setChecked(true);
         showFields(true);
@@ -139,8 +154,11 @@ public class CustomerProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (isFormVerified()) {
-                    Intent intent = new Intent(CustomerProfileActivity.this, PickShapeActivity.class);
-                    startActivity(intent);
+                    try {
+                        updateProfile();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -298,38 +316,122 @@ public class CustomerProfileActivity extends AppCompatActivity {
         else
             filledFormTotal++;
 
-        if (userImageFile == null)
+        /*if (userImageFile == null)
             Toast.makeText(CustomerProfileActivity.this, R.string.null_picture_error, Toast.LENGTH_SHORT).show();
+        else
+            filledFormTotal++;*/
+
+        //11
+        if (companyNameET.getText().length() == 0)
+            companyNameET.setError(getString(R.string.should_not_be_empty_error));
         else
             filledFormTotal++;
 
-        return filledFormTotal == 11;
+        if (workSinceET.getText().length() == 0)
+            workSinceET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (jobPositionET.getText().length() == 0 && jobPositionET.getVisibility() == View.VISIBLE)
+            jobPositionET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (companyAddressET.getText().length() == 0 && companyAddressET.getVisibility() == View.VISIBLE)
+            companyAddressET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (companyNameET.getText().length() == 0)
+            companyNameET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (monthlyIncomeET.getText().length() == 0)
+            monthlyIncomeET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (educationExpensesET.getText().length() == 0 && educationExpensesET.getVisibility() == View.VISIBLE)
+            educationExpensesET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (monthlyAssetET.getText().length() == 0 && monthlyAssetET.getVisibility() == View.VISIBLE)
+            monthlyAssetET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (householdExpensesET.getText().length() == 0 && householdExpensesET.getVisibility() == View.VISIBLE)
+            householdExpensesET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (transportExpensesET.getText().length() == 0 && transportExpensesET.getVisibility() == View.VISIBLE)
+            transportExpensesET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (employeeWageET.getText().length() == 0 && employeeWageET.getVisibility() == View.VISIBLE)
+            employeeWageET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (waterAndElectricyExpensesET.getText().length() == 0)
+            waterAndElectricyExpensesET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (miscExpensesET.getText().length() == 0)
+            miscExpensesET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        return filledFormTotal == 23;
     }
 
-    /*private void updateProfile() throws FileNotFoundException {
+    private void updateProfile() throws FileNotFoundException {
         String url = CommonConstants.SERVICE_UPDATE_USER_PROFILE;
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         progressDialog.show();
 
-        firstName = firstNameET.getField().getText().toString();
-        lastName = lastNameET.getField().getText().toString();
-        description = yourInformationET.getField().getText().toString();
+        String gender = maleRB.isChecked() ? CommonConstants.MALE : CommonConstants.FEMALE;
+        String status = singleRB.isChecked() ? CommonConstants.SINGLE : CommonConstants.MARRIED;
+        String job = employeeRB.isChecked() ? CommonConstants.EMPLOYEE : CommonConstants.ENTREPRENEUR;
 
         RequestParams parameters = new RequestParams();
-        parameters.put(CommonConstants.FIRST_NAME, firstName);
-        parameters.put(CommonConstants.LAST_NAME, lastName);
-        parameters.put(CommonConstants.DESCRIPTION, description);
+        parameters.put(CommonConstants.ID, sharedPreferences.getInt(CommonConstants.ID, 1));
+        parameters.put(CommonConstants.FIRST_NAME, firstNameET.getText().toString());
+        parameters.put(CommonConstants.LAST_NAME, lastNameET.getText().toString());
+        parameters.put(CommonConstants.EMAIL, emailET.getText().toString());
+        parameters.put(CommonConstants.GENDER, gender);
+        parameters.put(CommonConstants.DATE_OF_BIRTH, dateOfBirthET.getText().toString());
+        parameters.put(CommonConstants.PLACE_OF_BIRTH, placeOfBirthET.getText().toString());
+        parameters.put(CommonConstants.ID_CARD_NUMBER, idCardNumberET.getText().toString());
+        parameters.put(CommonConstants.ID_CARD_EXP_DATE, expiredIdET.getText().toString());
+        parameters.put(CommonConstants.ADDRESS, addressET.getText().toString());
+        parameters.put(CommonConstants.PHONE, phoneNumberET.getText().toString());
+        parameters.put(CommonConstants.MARITAL_STATUS, status);
+        parameters.put(CommonConstants.JOB, job);
+        parameters.put(CommonConstants.COMPANY_NAME, companyNameET.getText().toString());
+        parameters.put(CommonConstants.COMPANY_ADDRESS, companyAddressET.getText().toString());
+        parameters.put(CommonConstants.JOB_POSITION, jobPositionET.getText().toString());
+        parameters.put(CommonConstants.WORK_SINCE, workSinceET.getText().toString());
+        parameters.put(CommonConstants.MONTHLY_INCOME, removeComma(monthlyIncomeET.getText().toString()));
+        parameters.put(CommonConstants.EDUCATION_EXPENSES, removeComma(educationExpensesET.getText().toString()));
+        parameters.put(CommonConstants.HOUSEHOLD_EXPENSES, removeComma(householdExpensesET.getText().toString()));
+        parameters.put(CommonConstants.TRANSPORTATION_EXPENSES, removeComma(transportExpensesET.getText().toString()));
+        parameters.put(CommonConstants.WATER_ELECTRICITY_EXPENSES, removeComma(waterAndElectricyExpensesET.getText().toString()));
+        parameters.put(CommonConstants.MISC_EXPENSES, removeComma(waterAndElectricyExpensesET.getText().toString()));
+        parameters.put(CommonConstants.MONTHLY_ASSETS, removeComma(monthlyAssetET.getText().toString()));
+        parameters.put(CommonConstants.EMPLOYEE_WAGE, removeComma(employeeWageET.getText().toString()));
+        parameters.put(CommonConstants.LATITUDE, sharedPreferences.getString(CommonConstants.LATITUDE, "0.0"));
+        parameters.put(CommonConstants.LONGITUDE, sharedPreferences.getString(CommonConstants.LONGITUDE, "0.0"));
 
         if (userImageFile != null)
-            parameters.put(CommonConstants.PROFILE_PIC, userImageFile);
-
-        if (coverImageFile != null)
-            parameters.put(CommonConstants.COVER_IMAGE, coverImageFile);
-
-        parameters.put(CommonConstants.USER_ID, LivesApplication.getInstance().getUserId());
-        parameters.put(CommonConstants.AUTH_TOKEN, LivesApplication.getInstance().getAuthToken());
+            parameters.put(CommonConstants.PROFILE_PICTURE, userImageFile);
 
         APIAgent.post(url, parameters, new JsonHttpResponseHandler() {
             @Override
@@ -346,9 +448,10 @@ public class CustomerProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    if (response.getInt(CommonConstants.RESCODE) == 0) {
-                        changePreferences(response);
-                        Intent returnIntent = new Intent(CustomerProfileActivity.this, MyDashboardActivity.class);
+                    if (response.getInt(CommonConstants.STATUS) == CommonConstants.STATUS_OK) {
+                        Toast.makeText(CustomerProfileActivity.this, R.string.profile_updated, Toast.LENGTH_SHORT).show();
+                        changePreferences(response.getJSONObject(CommonConstants.RETURN_DATA));
+                        Intent returnIntent = new Intent(CustomerProfileActivity.this, MainActivity.class);
                         returnIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(returnIntent);
                     } else {
@@ -361,12 +464,12 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(CustomerProfileActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CustomerProfileActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(CustomerProfileActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CustomerProfileActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -375,7 +478,49 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
-    }*/
+    }
+
+    private static String removeComma(String number) {
+        return number.replace(",", "");
+    }
+
+    private void changePreferences(JSONObject jsonObject) {
+        SharedPreferences.Editor editor = TemanUsahaApplication.getInstance().getSharedPreferences().edit();
+
+        try {
+            editor.putString(CommonConstants.FIRST_NAME, jsonObject.getString(CommonConstants.FIRST_NAME));
+            editor.putString(CommonConstants.LAST_NAME, jsonObject.getString(CommonConstants.LAST_NAME));
+            editor.putString(CommonConstants.EMAIL, jsonObject.getString(CommonConstants.EMAIL));
+            editor.putString(CommonConstants.GENDER, jsonObject.getString(CommonConstants.GENDER));
+            editor.putString(CommonConstants.DATE_OF_BIRTH, jsonObject.getString(CommonConstants.DATE_OF_BIRTH));
+            editor.putString(CommonConstants.PLACE_OF_BIRTH, jsonObject.getString(CommonConstants.PLACE_OF_BIRTH));
+            editor.putString(CommonConstants.ID_CARD_NUMBER, jsonObject.getString(CommonConstants.ID_CARD_NUMBER));
+            editor.putString(CommonConstants.ID_CARD_EXP_DATE, jsonObject.getString(CommonConstants.ID_CARD_EXP_DATE));
+            editor.putString(CommonConstants.ADDRESS, jsonObject.getString(CommonConstants.ADDRESS));
+            editor.putString(CommonConstants.PHONE, jsonObject.getString(CommonConstants.PHONE));
+            editor.putString(CommonConstants.MARITAL_STATUS, jsonObject.getString(CommonConstants.MARITAL_STATUS));
+            editor.putString(CommonConstants.JOB, jsonObject.getString(CommonConstants.JOB));
+            editor.putString(CommonConstants.COMPANY_NAME, jsonObject.getString(CommonConstants.COMPANY_NAME));
+            editor.putString(CommonConstants.COMPANY_ADDRESS, jsonObject.getString(CommonConstants.COMPANY_ADDRESS));
+            editor.putString(CommonConstants.JOB_POSITION, jsonObject.getString(CommonConstants.JOB_POSITION));
+            editor.putString(CommonConstants.WORK_SINCE, jsonObject.getString(CommonConstants.WORK_SINCE));
+            editor.putString(CommonConstants.MONTHLY_INCOME, jsonObject.getString(CommonConstants.MONTHLY_INCOME));
+            editor.putString(CommonConstants.EDUCATION_EXPENSES, jsonObject.getString(CommonConstants.EDUCATION_EXPENSES));
+            editor.putString(CommonConstants.HOUSEHOLD_EXPENSES, jsonObject.getString(CommonConstants.HOUSEHOLD_EXPENSES));
+            editor.putString(CommonConstants.TRANSPORTATION_EXPENSES, jsonObject.getString(CommonConstants.TRANSPORTATION_EXPENSES));
+            editor.putString(CommonConstants.WATER_ELECTRICITY_EXPENSES, jsonObject.getString(CommonConstants.WATER_ELECTRICITY_EXPENSES));
+            editor.putString(CommonConstants.MISC_EXPENSES, jsonObject.getString(CommonConstants.MISC_EXPENSES));
+            editor.putString(CommonConstants.MONTHLY_ASSETS, jsonObject.getString(CommonConstants.MONTHLY_ASSETS));
+            editor.putString(CommonConstants.EMPLOYEE_WAGE, jsonObject.getString(CommonConstants.EMPLOYEE_WAGE));
+            editor.putString(CommonConstants.PROFILE_PICTURE, jsonObject.getString(CommonConstants.PROFILE_PICTURE));
+            editor.putString(CommonConstants.LATITUDE, jsonObject.getString(CommonConstants.LATITUDE));
+            editor.putString(CommonConstants.LONGITUDE, jsonObject.getString(CommonConstants.LONGITUDE));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        editor.apply();
+    }
 
 
     private void putData() {
@@ -399,6 +544,26 @@ public class CustomerProfileActivity extends AppCompatActivity {
             maleRB.setChecked(true);
         else
             femaleRB.setChecked(true);
+
+        if (sharedPreferences.getString(CommonConstants.JOB, CommonConstants.EMPLOYEE).equals(CommonConstants.EMPLOYEE))
+            employeeRB.setChecked(true);
+        else
+            entrepreneurRB.setChecked(true);
+
+        companyNameET.setText(sharedPreferences.getString(CommonConstants.COMPANY_NAME, ""));
+        workSinceET.setText(sharedPreferences.getString(CommonConstants.WORK_SINCE, ""));
+        jobPositionET.setText(sharedPreferences.getString(CommonConstants.JOB_POSITION, ""));
+        monthlyIncomeET.setText(sharedPreferences.getString(CommonConstants.MONTHLY_INCOME, ""));
+        educationExpensesET.setText(sharedPreferences.getString(CommonConstants.EDUCATION_EXPENSES, ""));
+        householdExpensesET.setText(sharedPreferences.getString(CommonConstants.HOUSEHOLD_EXPENSES, ""));
+        transportExpensesET.setText(sharedPreferences.getString(CommonConstants.TRANSPORTATION_EXPENSES, ""));
+        waterAndElectricyExpensesET.setText(sharedPreferences.getString(CommonConstants.WATER_ELECTRICITY_EXPENSES, ""));
+        miscExpensesET.setText(sharedPreferences.getString(CommonConstants.MISC_EXPENSES, ""));
+        companyAddressET.setText(sharedPreferences.getString(CommonConstants.COMPANY_ADDRESS, ""));
+        monthlyAssetET.setText(sharedPreferences.getString(CommonConstants.MONTHLY_ASSETS, ""));
+        employeeWageET.setText(sharedPreferences.getString(CommonConstants.EMPLOYEE_WAGE, ""));
+
+        imageLoader.display(profilePictureIV, CommonConstants.SERVICE_PROFILE_PIC + sharedPreferences.getString(CommonConstants.PROFILE_PICTURE, ""));
     }
 
     private void makePopupDialog() {
@@ -461,7 +626,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
         }
         try {
             FileOutputStream fos = new FileOutputStream(f);
-            image.compress(Bitmap.CompressFormat.JPEG, 80, fos);
+            image.compress(Bitmap.CompressFormat.JPEG, 60, fos);
             fos.close();
             return f;
         } catch (FileNotFoundException e) {
