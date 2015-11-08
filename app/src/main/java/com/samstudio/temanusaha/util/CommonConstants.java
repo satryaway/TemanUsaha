@@ -64,4 +64,9 @@ public class CommonConstants {
     public static String COMPANY_NAME = "company_name";
     public static int GPS_CODE = 69;
     public static String SERVICE_PROFILE_PIC = "http://temanusaha.com/images/profile_pictures/users/";
+    public static String LOAN_TYPE = "loan_type";
+    public static String LOAN_SEGMENT = "loan_segment";
+    public static String LOAN_PERIOD = "loan_period";
+    public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
+    public static String COMPANY = "company";
 }

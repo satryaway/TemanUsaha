@@ -1,15 +1,18 @@
 package com.samstudio.temanusaha;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.samstudio.temanusaha.entities.CreditCeiling;
 import com.samstudio.temanusaha.entities.CreditPurpose;
 import com.samstudio.temanusaha.entities.TimeRange;
+import com.samstudio.temanusaha.util.CommonConstants;
 import com.samstudio.temanusaha.util.Seeder;
 
 import java.util.ArrayList;
@@ -24,16 +27,27 @@ public class RegisterProfileActivity extends AppCompatActivity {
     private List<String> creditPurposeList = new ArrayList<>();
     private List<String> creditCeilingList = new ArrayList<>();
     private List<String> timeRangeList = new ArrayList<>();
+    private int creditPurpose = 0, creditCeiling = 0, timeRange = 0;
+    private int shapeCode;
+    private ImageView searchPartnerIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handleIntent();
         initUI();
         setCallBack();
     }
 
+    private void handleIntent() {
+        Intent intent = getIntent();
+        shapeCode = intent.getIntExtra(CommonConstants.SHAPE_CODE, 1);
+    }
+
     private void initUI() {
         setContentView(R.layout.get_loan_layout);
+
+        searchPartnerIV = (ImageView) findViewById(R.id.search_partner_iv);
 
         creditPurposeSP = (Spinner) findViewById(R.id.tujuan_kredit_sp);
         creditCeilingSP = (Spinner) findViewById(R.id.plafon_kredit_sp);
@@ -52,7 +66,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
         creditPurposeSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                creditPurpose = position+1;
             }
 
             @Override
@@ -68,7 +82,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
         creditCeilingSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                creditCeiling = position+1;
             }
 
             @Override
@@ -84,7 +98,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
         timeRangeSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                timeRange = position+1;
             }
 
             @Override
@@ -97,6 +111,16 @@ public class RegisterProfileActivity extends AppCompatActivity {
     }
 
     private void setCallBack() {
-
+        searchPartnerIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterProfileActivity.this, ShowMapActivity.class);
+                intent.putExtra(CommonConstants.SHAPE_CODE, shapeCode);
+                intent.putExtra(CommonConstants.LOAN_TYPE, creditPurpose);
+                intent.putExtra(CommonConstants.LOAN_SEGMENT, creditCeiling);
+                intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
+                startActivity(intent);
+            }
+        });
     }
 }

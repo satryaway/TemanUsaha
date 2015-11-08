@@ -159,4 +159,6 @@
     <string name="SERVER_ERROR">Server Error</string>
     <string name="profile_updated">Your profile has successfully updated</string>
     <string name="location_error">Cannot find your location</string>
+    <string name="no_correspondent_loan_type">Couldn\'t find partners based on your loan type</string>
+    <string name="your_location">Your Location</string>
 </resources>

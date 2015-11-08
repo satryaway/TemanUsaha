@@ -6,7 +6,7 @@ package com.samstudio.temanusaha.entities;
  */
 public class Partner {
     private int id, status;
-    private String name, company, date, imgURL, phoneNumber;
+    private String name, company, date, imgURL, phoneNumber, firstName, lastName;
     private double lat, lng;
 
     public Partner(int id, String name, String company, double lat, double lng, int status) {
@@ -19,6 +19,8 @@ public class Partner {
         this.date = "27 Agustus 2015 10:00";
         this.phoneNumber = "089696296962";
     }
+
+    public Partner(){}
 
     public int getId() {
         return id;
@@ -90,5 +92,21 @@ public class Partner {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

@@ -13,7 +13,7 @@ import com.samstudio.temanusaha.util.CommonConstants;
  * picking preferre
  */
 public class PickShapeActivity extends AppCompatActivity {
-    private ImageView roundIV;
+    private ImageView roundIV, triangleIV, hexagonIV, squareIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +26,37 @@ public class PickShapeActivity extends AppCompatActivity {
         setContentView(R.layout.pick_shape_layout);
 
         roundIV = (ImageView) findViewById(R.id.round_iv);
+        triangleIV = (ImageView) findViewById(R.id.triangle_iv);
+        hexagonIV = (ImageView) findViewById(R.id.hexagonal_iv);
+        squareIV = (ImageView) findViewById(R.id.square_iv);
     }
 
     private void setCallBack() {
-        roundIV.setOnClickListener(new View.OnClickListener() {
+        triangleIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startNewActivity(1);
+            }
+        });
+
+        hexagonIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewActivity(2);
+            }
+        });
+
+        squareIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewActivity(3);
+            }
+        });
+
+        roundIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewActivity(4);
             }
         });
     }
