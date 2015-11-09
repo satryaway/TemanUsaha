@@ -6,7 +6,9 @@ package com.samstudio.temanusaha.entities;
  */
 public class Partner {
     private int id, status;
-    private String name, company, date, imgURL, phoneNumber, firstName, lastName;
+    private String name, company, date, imgURL, phoneNumber, firstName, lastName, gender;
+    private String placeOfBirth, dateOfBirth, branch, description, email, profilePicture;
+    private String loanType, loanSegment;
     private double lat, lng;
 
     public Partner(int id, String name, String company, double lat, double lng, int status) {
@@ -108,5 +110,77 @@ public class Partner {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPlaceOfBirth() {
+        return placeOfBirth;
+    }
+
+    public void setPlaceOfBirth(String placeOfBirth) {
+        this.placeOfBirth = placeOfBirth;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public String getLoanType() {
+        return loanType;
+    }
+
+    public void setLoanType(String loanType) {
+        this.loanType = loanType;
+    }
+
+    public String getLoanSegment() {
+        return loanSegment;
+    }
+
+    public void setLoanSegment(String loanSegment) {
+        this.loanSegment = loanSegment;
     }
 }

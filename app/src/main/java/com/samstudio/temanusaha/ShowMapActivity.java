@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,7 +21,6 @@ import com.loopj.android.http.RequestParams;
 import com.samstudio.temanusaha.entities.Partner;
 import com.samstudio.temanusaha.util.APIAgent;
 import com.samstudio.temanusaha.util.CommonConstants;
-import com.samstudio.temanusaha.util.Seeder;
 import com.samstudio.temanusaha.util.Utility;
 
 import org.json.JSONException;
@@ -38,7 +39,8 @@ public class ShowMapActivity extends AppCompatActivity {
     private List<Partner> partnerList = new ArrayList<>();
     private GoogleMap googleMap;
     private int loanType, loanSegment, timeRange, personalityShape;
-    private int chosenId;
+    private int chosenId = 1;
+    private ImageView nextIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +62,19 @@ public class ShowMapActivity extends AppCompatActivity {
 
     private void initUI() {
         setContentView(R.layout.show_map_layout);
+
+        nextIV = (ImageView) findViewById(R.id.next_step_iv);
     }
 
     private void setCallBack() {
-
+        nextIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ShowMapActivity.this, PartnerConfirmationActivity.class);
+                intent.putExtra(CommonConstants.ID, chosenId);
+                startActivity(intent);
+            }
+        });
     }
 
     private void createMapView() {
@@ -115,7 +126,7 @@ public class ShowMapActivity extends AppCompatActivity {
             googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(Marker marker) {
-                    chosenId = position;
+                    chosenId = partnerList.get(position).getId();
                     return false;
                 }
             });
@@ -145,7 +156,7 @@ public class ShowMapActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     if (response.getInt(CommonConstants.STATUS) == CommonConstants.STATUS_OK) {
-                        partnerList = Utility.parsePartner(response);
+                        partnerList = Utility.parsePartners(response);
                         addMarkers();
                     } else {
                         Toast.makeText(ShowMapActivity.this, R.string.no_correspondent_loan_type, Toast.LENGTH_SHORT).show();

@@ -19,6 +19,10 @@ public class CommonConstants {
     public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
     public static String SERVICE_UPDATE_USER_PROFILE = BASE_URL + "doModify/user";
     public static String PLACE_OF_BIRTH = "place_of_birth";
+    public static String SERVICE_PROFILE_PIC = BASE_URL + "images/profile_pictures/users/";
+    public static String SERVICE_PROFILE_PIC_PARTNER = BASE_URL + "images/profile_pictures/partners/";
+    public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
+    public static String SERVICE_GET_PARTNER_DETAIL = BASE_URL + "getUserDetail/partner/";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";
     public static String GCM_TOKEN = "GCM_TOKEN";
@@ -63,10 +67,10 @@ public class CommonConstants {
     public static String LONGITUDE = "longitude";
     public static String COMPANY_NAME = "company_name";
     public static int GPS_CODE = 69;
-    public static String SERVICE_PROFILE_PIC = "http://temanusaha.com/images/profile_pictures/users/";
     public static String LOAN_TYPE = "loan_type";
     public static String LOAN_SEGMENT = "loan_segment";
     public static String LOAN_PERIOD = "loan_period";
-    public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
     public static String COMPANY = "company";
+    public static String BRANCH = "branch";
+    public static String DESCRIPTION = "description";
 }

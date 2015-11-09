@@ -29,7 +29,7 @@ public class Utility {
         return isValid;
     }
 
-    public static List<Partner> parsePartner(JSONObject response) {
+    public static List<Partner> parsePartners(JSONObject response) {
         List<Partner> partnerList = new ArrayList<>();
         try {
             JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
@@ -48,5 +48,29 @@ public class Utility {
             e.printStackTrace();
         }
         return partnerList;
+    }
+
+    public static Partner parsePartner(JSONObject response) {
+        Partner partner = new Partner();
+        try {
+            JSONObject object = response.getJSONObject(CommonConstants.RETURN_DATA);
+            partner.setId(Integer.valueOf(object.getString(CommonConstants.ID)));
+            partner.setFirstName(object.getString(CommonConstants.FIRST_NAME));
+            partner.setLastName(object.getString(CommonConstants.LAST_NAME));
+            partner.setPhoneNumber(object.getString(CommonConstants.PHONE));
+            partner.setGender(object.getString(CommonConstants.GENDER));
+            partner.setPlaceOfBirth(object.getString(CommonConstants.PLACE_OF_BIRTH));
+            partner.setDateOfBirth(object.getString(CommonConstants.DATE_OF_BIRTH));
+            partner.setCompany(object.getString(CommonConstants.COMPANY));
+            partner.setBranch(object.getString(CommonConstants.BRANCH));
+            partner.setDescription(object.getString(CommonConstants.DESCRIPTION));
+            partner.setEmail(object.getString(CommonConstants.EMAIL));
+            partner.setProfilePicture(object.getString(CommonConstants.PROFILE_PICTURE));
+            partner.setLoanType(object.getString(CommonConstants.LOAN_TYPE));
+            partner.setLoanSegment(object.getString(CommonConstants.LOAN_SEGMENT));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return partner;
     }
 }
