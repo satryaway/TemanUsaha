@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 
+import com.google.android.gms.cast.internal.ApplicationStatus;
+
 /**
  * Created by satryaway on 9/12/2015.
  * Show the main activity if user has logged in
  */
 public class MainActivity extends AppCompatActivity {
-    private ImageView optionMenuIV, profileIV;
+    private ImageView optionMenuIV, profileIV, applicationStatusIV;
     private Context context = MainActivity.this;
     private ImageView grabIV;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         optionMenuIV = (ImageView) findViewById(R.id.option_menu_iv);
         profileIV = (ImageView) findViewById(R.id.profile_iv);
         grabIV = (ImageView) findViewById(R.id.grab_iv);
+        applicationStatusIV = (ImageView) findViewById(R.id.application_status_iv);
     }
 
     private void setCallback() {
@@ -73,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CustomerProfileActivity.class));
+            }
+        });
+
+        applicationStatusIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AppStatusActivity.class));
             }
         });
     }

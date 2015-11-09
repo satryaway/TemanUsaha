@@ -113,7 +113,7 @@ public class SignUpActivity extends Activity {
         SharedPreferences.Editor editor= TemanUsahaApplication.getInstance().getSharedPreferences().edit();
 
         try {
-            editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ROW_ID));
+            editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ID));
             editor.putString(CommonConstants.FIRST_NAME, jsonObject.getString(CommonConstants.FIRST_NAME));
             editor.putString(CommonConstants.LAST_NAME, jsonObject.getString(CommonConstants.LAST_NAME));
             editor.putString(CommonConstants.EMAIL, jsonObject.getString(CommonConstants.EMAIL));

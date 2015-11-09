@@ -98,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 }
 
+                                finish();
+
                             } else {
                                 Toast.makeText(LoginActivity.this, R.string.login_failed_text, Toast.LENGTH_SHORT).show();
                             }
@@ -131,10 +133,11 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor= TemanUsahaApplication.getInstance().getSharedPreferences().edit();
 
         try {
-            editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ROW_ID));
+            editor.putInt(CommonConstants.ID, jsonObject.getInt(CommonConstants.ID));
             editor.putString(CommonConstants.FIRST_NAME, jsonObject.getString(CommonConstants.FIRST_NAME));
             editor.putString(CommonConstants.LAST_NAME, jsonObject.getString(CommonConstants.LAST_NAME));
             editor.putString(CommonConstants.EMAIL, jsonObject.getString(CommonConstants.EMAIL));
+            editor.putBoolean(CommonConstants.IS_LOGGED_IN, true);
         } catch (JSONException e) {
             e.printStackTrace();
         }

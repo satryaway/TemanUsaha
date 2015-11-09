@@ -32,7 +32,6 @@ public class CommonConstants {
     public static String LAST_NAME = "last_name";
     public static String PASSWORD_CONFIRMATION = "password_confirmation";
     public static String ID = "id";
-    public static String ROW_ID = "row_id";
     public static String IS_UPDATED = "is_updated";
     public static String MALE = "male";
     public static String GENDER = "gender";
@@ -77,4 +76,5 @@ public class CommonConstants {
     public static String USER_ID = "user_id";
     public static String PARTNER_ID = "partner_id";
     public static String PERSONALITY_SHAPE = "personality_shape";
+    public static String IS_LOGGED_IN = "isLoggedIn";
 }
