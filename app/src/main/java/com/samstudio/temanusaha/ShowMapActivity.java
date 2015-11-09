@@ -72,6 +72,10 @@ public class ShowMapActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ShowMapActivity.this, PartnerConfirmationActivity.class);
                 intent.putExtra(CommonConstants.ID, chosenId);
+                intent.putExtra(CommonConstants.LOAN_TYPE, loanType);
+                intent.putExtra(CommonConstants.LOAN_SEGMENT, loanSegment);
+                intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
+                intent.putExtra(CommonConstants.SHAPE_CODE, personalityShape);
                 startActivity(intent);
             }
         });
