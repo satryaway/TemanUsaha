@@ -17,8 +17,9 @@ public class TextConverter {
         switch (code) {
             case "administration process" : convertedCode = context.getString(R.string.administration_process); break;
             case "meet up" : convertedCode = context.getString(R.string.meet_up_process); break;
-            case "waiting for approval" : convertedCode = context.getString(R.string.waiting_for_approval); break;
-            case "approved" : convertedCode = context.getString(R.string.approved); break;
+            case "approved" : convertedCode = context.getString(R.string.waiting_for_approval); break;
+            case "confirmed" : convertedCode = context.getString(R.string.confirmed); break;
+            case "cancelled" : convertedCode = context.getString(R.string.cancelled); break;
             default: convertedCode = context.getString(R.string.rejected); break;
         }
 

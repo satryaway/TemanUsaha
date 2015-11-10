@@ -24,6 +24,7 @@ public class CommonConstants {
     public static String SERVICE_GET_PARTNER_LIST = BASE_URL + "loan/list_partners/";
     public static String SERVICE_GET_PARTNER_DETAIL = BASE_URL + "getUserDetail/partner/";
     public static String SERVICE_SAVE_APPLICATION = BASE_URL + "loan/save_application";
+    public static String SERVICE_PROCESS_APPLICATION = BASE_URL + "loan/process_application";
     public static String SERVICE_GET_CONNECTED_PARTNER = BASE_URL + "loan/list_connected_partners/";
     public static String TYPE = "type";
     public static String RETURN_DATA = "return_data";
@@ -80,4 +81,10 @@ public class CommonConstants {
     public static String IS_LOGGED_IN = "isLoggedIn";
     public static String APP_ID = "app_id";
     public static String DATETIME = "datetime";
+    public static String APPLICATION_ID = "application_id";
+    public static String CANCELLED = "cancelled";
+    public static String CONFIRMED = "confirmed";
+    public static String MESSAGE = "message";
+    public static String ADMINISTRATION_PROCESS = "administration process";
+    public static String MEET_UP = "meet up";
 }

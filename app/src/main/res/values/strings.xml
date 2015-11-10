@@ -162,4 +162,6 @@
     <string name="no_correspondent_loan_type">Couldn\'t find partners based on your loan type</string>
     <string name="your_location">Your Location</string>
     <string name="send">Send</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="confirmed">Confirmed</string>
 </resources>

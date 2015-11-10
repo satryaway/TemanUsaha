@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.samstudio.temanusaha.AdministrationProcessActivity;
-import com.samstudio.temanusaha.AppApprovedActivity;
+import com.samstudio.temanusaha.AppConfirmedActivity;
 import com.samstudio.temanusaha.AppRejectedActivity;
 import com.samstudio.temanusaha.MeetUpProcessActivity;
 import com.samstudio.temanusaha.R;
@@ -21,7 +21,6 @@ import com.samstudio.temanusaha.TemanUsahaApplication;
 import com.samstudio.temanusaha.WaitingForApprovalActivity;
 import com.samstudio.temanusaha.adapters.AppStatusListAdapter;
 import com.samstudio.temanusaha.entities.Application;
-import com.samstudio.temanusaha.entities.Partner;
 import com.samstudio.temanusaha.util.APIAgent;
 import com.samstudio.temanusaha.util.CommonConstants;
 import com.samstudio.temanusaha.util.Utility;
@@ -89,16 +88,22 @@ public class AppStatusFragment extends Fragment {
                         break;
 
                     case "approved":
-                        intent = new Intent(getActivity(), AppApprovedActivity.class);
+                        intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.ID, applicationList.get(position).getId());
                         break;
 
                     case "rejected":
                         intent = new Intent(getActivity(), AppRejectedActivity.class);
                         break;
 
+                    case "confirmed":
+                        intent = new Intent(getActivity(), AppConfirmedActivity.class);
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        break;
+
                     default:
-                        intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
+                        intent = new Intent(getActivity(), AppRejectedActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         break;
                 }
@@ -139,11 +144,11 @@ public class AppStatusFragment extends Fragment {
                         JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
-                            if (position == 0 && (application.getStatus().equals("administration process") || application.getStatus().equals("meetup") || application.getStatus().equals("waiting for approval"))) {
+                            if (position == 0 && (application.getStatus().equals("administration process") || application.getStatus().equals("meet up") || application.getStatus().equals("approved"))) {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals("approved") || application.getStatus().equals("rejected"))) {
+                            if (position == 1 && (application.getStatus().equals("confirmed") || application.getStatus().equals("rejected"))) {
                                 applicationList.add(application);
                             }
                         }
