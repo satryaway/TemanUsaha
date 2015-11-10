@@ -13,7 +13,7 @@ import com.samstudio.temanusaha.util.CommonConstants;
  * Created by satryaway on 10/25/2015.
  * approved app activity
  */
-public class AppApprovedActivity extends AppCompatActivity {
+public class AppConfirmedActivity extends AppCompatActivity {
     private String date;
     private TextView dateTV;
     private Button okBtn;
