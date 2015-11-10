@@ -87,4 +87,6 @@ public class CommonConstants {
     public static String MESSAGE = "message";
     public static String ADMINISTRATION_PROCESS = "administration process";
     public static String MEET_UP = "meet up";
+    public static String APPROVED = "approved";
+    public static String REJECTED = "rejected";
 }

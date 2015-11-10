@@ -144,11 +144,11 @@ public class AppStatusFragment extends Fragment {
                         JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
-                            if (position == 0 && (application.getStatus().equals("administration process") || application.getStatus().equals("meet up") || application.getStatus().equals("approved"))) {
+                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.APPROVED))) {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals("confirmed") || application.getStatus().equals("rejected"))) {
+                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED))) {
                                 applicationList.add(application);
                             }
                         }
