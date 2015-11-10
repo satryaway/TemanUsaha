@@ -11,14 +11,14 @@ import com.samstudio.temanusaha.TemanUsahaApplication;
  */
 public class TextConverter {
 
-    public static String convertStatsCodeToString(int code) {
+    public static String convertStatsCodeToString(String code) {
         Context context = TemanUsahaApplication.getInstance();
         String convertedCode = "";
         switch (code) {
-            case 1 : convertedCode = context.getString(R.string.administration_process); break;
-            case 2 : convertedCode = context.getString(R.string.meet_up_process); break;
-            case 3 : convertedCode = context.getString(R.string.waiting_for_approval); break;
-            case 4 : convertedCode = context.getString(R.string.approved); break;
+            case "administration process" : convertedCode = context.getString(R.string.administration_process); break;
+            case "meet up" : convertedCode = context.getString(R.string.meet_up_process); break;
+            case "waiting for approval" : convertedCode = context.getString(R.string.waiting_for_approval); break;
+            case "approved" : convertedCode = context.getString(R.string.approved); break;
             default: convertedCode = context.getString(R.string.rejected); break;
         }
 

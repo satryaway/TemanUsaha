@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.samstudio.temanusaha.R;
+import com.samstudio.temanusaha.entities.Application;
 import com.samstudio.temanusaha.entities.Partner;
+import com.samstudio.temanusaha.util.CommonConstants;
 import com.samstudio.temanusaha.util.TextConverter;
 import com.samstudio.temanusaha.util.UniversalImageLoader;
 
@@ -21,30 +23,30 @@ import java.util.List;
  * adapter for application status
  */
 public class AppStatusListAdapter extends BaseAdapter {
-    private List<Partner> partnerList = new ArrayList<>();
+    private List<Application> applicationList = new ArrayList<>();
     private Context context;
     private UniversalImageLoader imageLoader;
 
-    public AppStatusListAdapter (Context context, List<Partner> partnerList) {
+    public AppStatusListAdapter (Context context, List<Application> applicationList) {
         this.context = context;
-        this.partnerList = partnerList;
+        this.applicationList = applicationList;
         imageLoader = new UniversalImageLoader(context);
         imageLoader.initImageLoader();
     }
 
-    public void update(List<Partner> partnerList) {
-        this.partnerList = partnerList;
+    public void update(List<Application> applicationList) {
+        this.applicationList = applicationList;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return partnerList.size();
+        return applicationList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return partnerList.get(position);
+        return applicationList.get(position);
     }
 
     @Override
@@ -71,11 +73,11 @@ public class AppStatusListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        imageLoader.display(holder.partnerPicIV, partnerList.get(position).getImgURL());
-        holder.partnerNameTV.setText(partnerList.get(position).getName());
-        holder.ptNameTV.setText(partnerList.get(position).getCompany());
-        holder.statusTV.setText(TextConverter.convertStatsCodeToString(partnerList.get(position).getStatus()));
-        holder.dateTV.setText(partnerList.get(position).getDate());
+        imageLoader.display(holder.partnerPicIV, CommonConstants.SERVICE_PROFILE_PIC_PARTNER + applicationList.get(position).getPartner().getProfilePicture());
+        holder.partnerNameTV.setText(applicationList.get(position).getPartner().getFirstName() + " " + applicationList.get(position).getPartner().getLastName());
+        holder.ptNameTV.setText(applicationList.get(position).getPartner().getCompany());
+        holder.statusTV.setText(TextConverter.convertStatsCodeToString(applicationList.get(position).getStatus()));
+        holder.dateTV.setText(applicationList.get(position).getDatetime());
 
         return convertView;
     }

@@ -185,7 +185,9 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        PartnerConfirmationActivity.this.finish();
+                        Intent intent = new Intent(PartnerConfirmationActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 });
         AlertDialog alert = builder.create();

@@ -1,5 +1,6 @@
 package com.samstudio.temanusaha.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,20 +9,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.samstudio.temanusaha.AdministrationProcessActivity;
 import com.samstudio.temanusaha.AppApprovedActivity;
 import com.samstudio.temanusaha.AppRejectedActivity;
 import com.samstudio.temanusaha.MeetUpProcessActivity;
 import com.samstudio.temanusaha.R;
+import com.samstudio.temanusaha.TemanUsahaApplication;
 import com.samstudio.temanusaha.WaitingForApprovalActivity;
 import com.samstudio.temanusaha.adapters.AppStatusListAdapter;
+import com.samstudio.temanusaha.entities.Application;
 import com.samstudio.temanusaha.entities.Partner;
+import com.samstudio.temanusaha.util.APIAgent;
 import com.samstudio.temanusaha.util.CommonConstants;
-import com.samstudio.temanusaha.util.Seeder;
+import com.samstudio.temanusaha.util.Utility;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by satryaway on 10/17/2015.
@@ -33,7 +45,7 @@ public class AppStatusFragment extends Fragment {
     private ListView listView;
     private AppStatusListAdapter listAdapter;
     private int position;
-    private List<Partner> partnerList = new ArrayList<>();
+    private List<Application> applicationList = new ArrayList<>();
 
     public static AppStatusFragment newInstance(int position) {
         AppStatusFragment appStatusFragment = new AppStatusFragment();
@@ -57,37 +69,37 @@ public class AppStatusFragment extends Fragment {
 
     private void initUI() {
         listView = (ListView) view.findViewById(R.id.app_status_lv);
-        listAdapter = new AppStatusListAdapter(getActivity(), new ArrayList<Partner>());
+        listAdapter = new AppStatusListAdapter(getActivity(), new ArrayList<Application>());
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
 
-                switch (partnerList.get(position).getStatus()) {
-                    case 1:
+                switch (applicationList.get(position).getStatus()) {
+                    case "administration process":
                         intent = new Intent(getActivity(), AdministrationProcessActivity.class);
-                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         break;
 
-                    case 2:
+                    case "meet up":
                         intent = new Intent(getActivity(), MeetUpProcessActivity.class);
-                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
-                        intent.putExtra(CommonConstants.PHONE_NUMBER, partnerList.get(position).getPhoneNumber());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.PHONE_NUMBER, applicationList.get(position).getPartner().getPhoneNumber());
                         break;
 
-                    case 4:
+                    case "approved":
                         intent = new Intent(getActivity(), AppApprovedActivity.class);
-                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         break;
 
-                    case 5:
+                    case "rejected":
                         intent = new Intent(getActivity(), AppRejectedActivity.class);
                         break;
 
                     default:
                         intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
-                        intent.putExtra(CommonConstants.DATE, partnerList.get(position).getDate());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         break;
                 }
 
@@ -101,7 +113,57 @@ public class AppStatusFragment extends Fragment {
     }
 
     private void getData() {
-        partnerList = position == 0 ? Seeder.getPartners() : Seeder.getPartnersWithResult();
-        listAdapter.update(partnerList);
+        /*applicationList = position == 0 ? Seeder.getPartners() : Seeder.getPartnersWithResult();
+        listAdapter.update(applicationList);*/
+        String url = CommonConstants.SERVICE_GET_CONNECTED_PARTNER + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 1);
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getString(R.string.please_wait));
+
+        APIAgent.get(url, null, new JsonHttpResponseHandler(){
+
+            @Override
+            public void onStart() {
+                progressDialog.show();
+            }
+
+            @Override
+            public void onFinish() {
+                progressDialog.hide();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    int status = response.getInt(CommonConstants.STATUS);
+                    if (status == CommonConstants.STATUS_OK) {
+                        JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
+                            if (position == 0 && (application.getStatus().equals("administration process") || application.getStatus().equals("meetup") || application.getStatus().equals("waiting for approval"))) {
+                                applicationList.add(application);
+                            }
+
+                            if (position == 1 && (application.getStatus().equals("approved") || application.getStatus().equals("rejected"))) {
+                                applicationList.add(application);
+                            }
+                        }
+
+                        listAdapter.update(applicationList);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(getActivity(), R.string.RTO, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(getActivity(), R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

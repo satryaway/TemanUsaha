@@ -1,5 +1,6 @@
 package com.samstudio.temanusaha.util;
 
+import com.samstudio.temanusaha.entities.Application;
 import com.samstudio.temanusaha.entities.Partner;
 
 import org.json.JSONArray;
@@ -72,5 +73,28 @@ public class Utility {
             e.printStackTrace();
         }
         return partner;
+    }
+
+    public static Application parseApplications(JSONObject jsonObject) {
+        Application application = new Application();
+        try {
+            Partner partner = new Partner();
+            application.setId(jsonObject.getString(CommonConstants.APP_ID));
+            application.setStatus(jsonObject.getString(CommonConstants.STATUS));
+            application.setDatetime(jsonObject.getString(CommonConstants.DATETIME));
+
+            partner.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
+            partner.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));
+            partner.setCompany(jsonObject.getString(CommonConstants.COMPANY));
+            partner.setProfilePicture(jsonObject.getString(CommonConstants.PROFILE_PICTURE));
+            partner.setLoanType(jsonObject.getString(CommonConstants.LOAN_TYPE));
+            partner.setPhoneNumber(jsonObject.getString(CommonConstants.PHONE));
+
+            application.setPartner(partner);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return application;
     }
 }
