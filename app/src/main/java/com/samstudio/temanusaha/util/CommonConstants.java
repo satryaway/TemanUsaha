@@ -18,6 +18,7 @@ public class CommonConstants {
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
     public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
     public static String SERVICE_UPDATE_USER_PROFILE = BASE_URL + "doModify/user";
+    public static String SERVICE_FORGOT_PASSWORD = BASE_URL + "forgot_password";
     public static String SERVICE_GET_USER_DETAIL = BASE_URL + "getUserDetail/user/";
     public static String SERVICE_CHANGE_PASSWORD = BASE_URL + "change_password";
     public static String SERVICE_PROFILE_PIC = BASE_URL + "images/profile_pictures/users/";

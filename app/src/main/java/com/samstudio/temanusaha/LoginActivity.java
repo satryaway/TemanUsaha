@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailET, passwordET;
     private String email, password;
     private String token;
-    private TextView signUpTV;
+    private TextView signUpTV, forgotPasswordTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         emailET = (EditText) findViewById(R.id.email_et);
         passwordET = (EditText) findViewById(R.id.password_et);
         signUpTV = (TextView) findViewById(R.id.sign_up_tv);
+        forgotPasswordTV = (TextView) findViewById(R.id.forgot_password_tv);
     }
 
     private void setCallBack() {
@@ -70,6 +71,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
+
+        forgotPasswordTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
     }

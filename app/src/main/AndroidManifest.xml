@@ -71,6 +71,7 @@
         <activity android:name=".AppConfirmedActivity" />
         <activity android:name=".AppRejectedActivity" />
         <activity android:name=".AppStatusActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".SignUpActivity" android:windowSoftInputMode="adjustPan" />
 
         <receiver

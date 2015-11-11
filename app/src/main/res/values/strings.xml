@@ -169,4 +169,7 @@
     <string name="logout_confirmation_msg">Are you sure want to log out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="email_will_be_sent">An email will be sent to reset your password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
