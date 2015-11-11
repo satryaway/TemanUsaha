@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import com.google.android.gms.cast.internal.ApplicationStatus;
+import com.samstudio.temanusaha.util.CommonConstants;
 
 /**
  * Created by satryaway on 9/12/2015.
@@ -23,14 +24,15 @@ public class MainActivity extends AppCompatActivity {
     private Context context = MainActivity.this;
     private ImageView grabIV;
     private SharedPreferences sharedPreferences;
+    private String deviceID, latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = TemanUsahaApplication.getInstance().getSharedPreferences();
+        putData();
         initUI();
         setCallback();
-        putData();
     }
 
     private void initUI() {
@@ -108,6 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
+
+                editor.putString(CommonConstants.LATITUDE, latitude);
+                editor.putString(CommonConstants.LONGITUDE, longitude);
+                editor.putString(CommonConstants.GCM_TOKEN, deviceID);
+                editor.apply();
+
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -125,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void putData() {
-        if (!TemanUsahaApplication.getInstance().isCustomer()) {
-            grabIV.setImageResource(R.drawable.get_cust);
-        }
+        deviceID = sharedPreferences.getString(CommonConstants.GCM_TOKEN, "");
+        latitude = sharedPreferences.getString(CommonConstants.LATITUDE, "");
+        longitude = sharedPreferences.getString(CommonConstants.LONGITUDE, "");
     }
 }
