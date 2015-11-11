@@ -18,6 +18,7 @@ public class CommonConstants {
     public static String SERVICE_LOGIN_PARTNER = BASE_URL + "doLogin/partner";
     public static String SERVICE_DO_REGISTER_USER = BASE_URL + "doRegister/user";
     public static String SERVICE_UPDATE_USER_PROFILE = BASE_URL + "doModify/user";
+    public static String SERVICE_GET_USER_DETAIL = BASE_URL + "getUserDetail/user/";
     public static String SERVICE_CHANGE_PASSWORD = BASE_URL + "change_password";
     public static String SERVICE_PROFILE_PIC = BASE_URL + "images/profile_pictures/users/";
     public static String SERVICE_PROFILE_PIC_PARTNER = BASE_URL + "images/profile_pictures/partners/";
@@ -92,4 +93,14 @@ public class CommonConstants {
     public static String REJECTED = "rejected";
     public static String USER = "user";
     public static String CURRENT_PASSWORD = "current_password";
+
+    public static String KAS = "kas";
+    public static String TABUNGAN = "tabungan";
+    public static String PERSEDIAAN = "persediaan";
+    public static String RUMAH = "rumah";
+    public static String KENDARAAN = "kendaraan";
+    public static String ALAT = "alat";
+    public static String BARANG = "barang";
+    public static String PIUTANG = "piutang";
+    public static String HUTANG = "hutang";
 }

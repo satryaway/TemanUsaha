@@ -18,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -72,15 +73,66 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private EditText employeeWageET;
     private RadioButton entrepreneurRB;
     private UniversalImageLoader imageLoader;
+    private EditText kasSaatIniET, tabunganET, persediaanBarangET, rumahTanahET, kendaraanET, alatUsahaET, barangBerhargaET, piutangET, hutangBankET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        sharedPreferences = TemanUsahaApplication.getInstance().getSharedPreferences();
         imageLoader = new UniversalImageLoader(this);
         imageLoader.initImageLoader();
         initUI();
         setCallBack();
-        putData();
+        getData();
+        //putData();
+    }
+
+    private void getData() {
+        String url = CommonConstants.SERVICE_GET_USER_DETAIL + TemanUsahaApplication.getInstance().getSharedPreferences().getInt(CommonConstants.ID, 1);
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.please_wait));
+        progressDialog.setCancelable(false);
+
+        APIAgent.get(url, null, new JsonHttpResponseHandler(){
+            @Override
+            public void onStart() {
+                progressDialog.show();
+            }
+
+            @Override
+            public void onProgress(long bytesWritten, long totalSize) {
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if (response.getInt(CommonConstants.STATUS) == CommonConstants.STATUS_OK) {
+                        putData(response);
+                    } else {
+                        Toast.makeText(CustomerProfileActivity.this, R.string.failed, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(CustomerProfileActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Toast.makeText(CustomerProfileActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                progressDialog.dismiss();
+            }
+        });
     }
 
     private void initUI() {
@@ -123,6 +175,16 @@ public class CustomerProfileActivity extends AppCompatActivity {
         companyAddressET = (EditText) findViewById(R.id.company_address_et);
         monthlyAssetET = (EditText) findViewById(R.id.monthly_asset_et);
         employeeWageET = (EditText) findViewById(R.id.employee_wage_et);
+
+        kasSaatIniET = (EditText) findViewById(R.id.kas_saat_ini_et);
+        tabunganET = (EditText) findViewById(R.id.tabungan_et);
+        persediaanBarangET = (EditText) findViewById(R.id.persediaan_barang_et);
+        rumahTanahET = (EditText) findViewById(R.id.rumah_tanah_yang_dimiliki_et);
+        kendaraanET= (EditText) findViewById(R.id.kendaraan_yang_dimiliki_et);
+        alatUsahaET = (EditText) findViewById(R.id.alat_usaha_et);
+        barangBerhargaET = (EditText) findViewById(R.id.barang_berharga_et);
+        piutangET = (EditText) findViewById(R.id.piutang_et);
+        hutangBankET = (EditText) findViewById(R.id.hutang_bank_et);
 
         employeeRB = (RadioButton) findViewById(R.id.employee_rb);
         entrepreneurRB = (RadioButton) findViewById(R.id.entrepreneur_rb);
@@ -387,7 +449,54 @@ public class CustomerProfileActivity extends AppCompatActivity {
         else
             filledFormTotal++;
 
-        return filledFormTotal == 23;
+        //23
+
+        if (kasSaatIniET.getText().toString().isEmpty())
+            kasSaatIniET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (tabunganET.getText().toString().isEmpty())
+            tabunganET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (persediaanBarangET.getText().toString().isEmpty())
+            persediaanBarangET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (rumahTanahET.getText().toString().isEmpty())
+            rumahTanahET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (kendaraanET.getText().toString().isEmpty())
+            kendaraanET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (alatUsahaET.getText().toString().isEmpty())
+            alatUsahaET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (barangBerhargaET.getText().toString().isEmpty())
+            barangBerhargaET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (piutangET.getText().toString().isEmpty())
+            piutangET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        if (hutangBankET.getText().toString().isEmpty())
+            hutangBankET.setError(getString(R.string.should_not_be_empty_error));
+        else
+            filledFormTotal++;
+
+        return filledFormTotal == 32;
     }
 
     private void updateProfile() throws FileNotFoundException {
@@ -429,6 +538,16 @@ public class CustomerProfileActivity extends AppCompatActivity {
         parameters.put(CommonConstants.EMPLOYEE_WAGE, removeComma(employeeWageET.getText().toString()));
         parameters.put(CommonConstants.LATITUDE, sharedPreferences.getString(CommonConstants.LATITUDE, "0.0"));
         parameters.put(CommonConstants.LONGITUDE, sharedPreferences.getString(CommonConstants.LONGITUDE, "0.0"));
+
+        parameters.put(CommonConstants.KAS, kasSaatIniET.getText().toString());
+        parameters.put(CommonConstants.TABUNGAN, tabunganET.getText().toString());
+        parameters.put(CommonConstants.PERSEDIAAN, persediaanBarangET.getText().toString());
+        parameters.put(CommonConstants.RUMAH, rumahTanahET.getText().toString());
+        parameters.put(CommonConstants.KENDARAAN, kendaraanET.getText().toString());
+        parameters.put(CommonConstants.ALAT, alatUsahaET.getText().toString());
+        parameters.put(CommonConstants.BARANG, barangBerhargaET.getText().toString());
+        parameters.put(CommonConstants.PIUTANG, piutangET.getText().toString());
+        parameters.put(CommonConstants.HUTANG, hutangBankET.getText().toString());
 
         if (userImageFile != null)
             parameters.put(CommonConstants.PROFILE_PICTURE, userImageFile);
@@ -515,6 +634,16 @@ public class CustomerProfileActivity extends AppCompatActivity {
             editor.putString(CommonConstants.PROFILE_PICTURE, jsonObject.getString(CommonConstants.PROFILE_PICTURE));
             editor.putString(CommonConstants.LATITUDE, jsonObject.getString(CommonConstants.LATITUDE));
             editor.putString(CommonConstants.LONGITUDE, jsonObject.getString(CommonConstants.LONGITUDE));
+
+            editor.putString(CommonConstants.KAS, CommonConstants.KAS);
+            editor.putString(CommonConstants.TABUNGAN, CommonConstants.TABUNGAN);
+            editor.putString(CommonConstants.PERSEDIAAN, CommonConstants.PERSEDIAAN);
+            editor.putString(CommonConstants.RUMAH, CommonConstants.RUMAH);
+            editor.putString(CommonConstants.KENDARAAN, CommonConstants.KENDARAAN);
+            editor.putString(CommonConstants.ALAT, CommonConstants.ALAT);
+            editor.putString(CommonConstants.BARANG, CommonConstants.BARANG);
+            editor.putString(CommonConstants.PIUTANG, CommonConstants.PIUTANG);
+            editor.putString(CommonConstants.HUTANG, CommonConstants.HUTANG);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -523,47 +652,58 @@ public class CustomerProfileActivity extends AppCompatActivity {
     }
 
 
-    private void putData() {
-        sharedPreferences = TemanUsahaApplication.getInstance().getSharedPreferences();
-        firstNameET.setText(sharedPreferences.getString(CommonConstants.FIRST_NAME, ""));
-        lastNameET.setText(sharedPreferences.getString(CommonConstants.LAST_NAME, ""));
-        placeOfBirthET.setText(sharedPreferences.getString(CommonConstants.PLACE_OF_BIRTH, ""));
-        dateOfBirthET.setText(sharedPreferences.getString(CommonConstants.DATE_OF_BIRTH, ""));
-        idCardNumberET.setText(sharedPreferences.getString(CommonConstants.ID_CARD_NUMBER, ""));
-        emailET.setText(sharedPreferences.getString(CommonConstants.EMAIL, ""));
-        expiredIdET.setText(sharedPreferences.getString(CommonConstants.ID_CARD_EXP_DATE, ""));
-        addressET.setText(sharedPreferences.getString(CommonConstants.ADDRESS, ""));
-        phoneNumberET.setText(sharedPreferences.getString(CommonConstants.PHONE, ""));
+    private void putData(JSONObject jsonObject) throws JSONException {
+        JSONObject object = jsonObject.getJSONObject(CommonConstants.RETURN_DATA);
 
-        if (sharedPreferences.getString(CommonConstants.MARITAL_STATUS, CommonConstants.SINGLE).equals(CommonConstants.SINGLE))
+        firstNameET.setText(object.getString(CommonConstants.FIRST_NAME));
+        lastNameET.setText(object.getString(CommonConstants.LAST_NAME));
+        placeOfBirthET.setText(object.getString(CommonConstants.PLACE_OF_BIRTH));
+        dateOfBirthET.setText(object.getString(CommonConstants.DATE_OF_BIRTH));
+        idCardNumberET.setText(object.getString(CommonConstants.ID_CARD_NUMBER));
+        emailET.setText(object.getString(CommonConstants.EMAIL));
+        expiredIdET.setText(object.getString(CommonConstants.ID_CARD_EXP_DATE));
+        addressET.setText(object.getString(CommonConstants.ADDRESS));
+        phoneNumberET.setText(object.getString(CommonConstants.PHONE));
+
+        if (object.getString(CommonConstants.MARITAL_STATUS).equals(CommonConstants.SINGLE))
             singleRB.setChecked(true);
         else
             marriedRB.setChecked(true);
 
-        if (sharedPreferences.getString(CommonConstants.GENDER, CommonConstants.MALE).equals(CommonConstants.MALE))
+        if (object.getString(CommonConstants.GENDER).equals(CommonConstants.MALE))
             maleRB.setChecked(true);
         else
             femaleRB.setChecked(true);
 
-        if (sharedPreferences.getString(CommonConstants.JOB, CommonConstants.EMPLOYEE).equals(CommonConstants.EMPLOYEE))
+        if (object.getString(CommonConstants.JOB).equals(CommonConstants.EMPLOYEE))
             employeeRB.setChecked(true);
         else
             entrepreneurRB.setChecked(true);
 
-        companyNameET.setText(sharedPreferences.getString(CommonConstants.COMPANY_NAME, ""));
-        workSinceET.setText(sharedPreferences.getString(CommonConstants.WORK_SINCE, ""));
-        jobPositionET.setText(sharedPreferences.getString(CommonConstants.JOB_POSITION, ""));
-        monthlyIncomeET.setText(sharedPreferences.getString(CommonConstants.MONTHLY_INCOME, ""));
-        educationExpensesET.setText(sharedPreferences.getString(CommonConstants.EDUCATION_EXPENSES, ""));
-        householdExpensesET.setText(sharedPreferences.getString(CommonConstants.HOUSEHOLD_EXPENSES, ""));
-        transportExpensesET.setText(sharedPreferences.getString(CommonConstants.TRANSPORTATION_EXPENSES, ""));
-        waterAndElectricyExpensesET.setText(sharedPreferences.getString(CommonConstants.WATER_ELECTRICITY_EXPENSES, ""));
-        miscExpensesET.setText(sharedPreferences.getString(CommonConstants.MISC_EXPENSES, ""));
-        companyAddressET.setText(sharedPreferences.getString(CommonConstants.COMPANY_ADDRESS, ""));
-        monthlyAssetET.setText(sharedPreferences.getString(CommonConstants.MONTHLY_ASSETS, ""));
-        employeeWageET.setText(sharedPreferences.getString(CommonConstants.EMPLOYEE_WAGE, ""));
+        companyNameET.setText(object.getString(CommonConstants.COMPANY_NAME));
+        workSinceET.setText(object.getString(CommonConstants.WORK_SINCE));
+        jobPositionET.setText(object.getString(CommonConstants.JOB_POSITION));
+        monthlyIncomeET.setText(object.getString(CommonConstants.MONTHLY_INCOME));
+        educationExpensesET.setText(object.getString(CommonConstants.EDUCATION_EXPENSES));
+        householdExpensesET.setText(object.getString(CommonConstants.HOUSEHOLD_EXPENSES));
+        transportExpensesET.setText(object.getString(CommonConstants.TRANSPORTATION_EXPENSES));
+        waterAndElectricyExpensesET.setText(object.getString(CommonConstants.WATER_ELECTRICITY_EXPENSES));
+        miscExpensesET.setText(object.getString(CommonConstants.MISC_EXPENSES));
+        companyAddressET.setText(object.getString(CommonConstants.COMPANY_ADDRESS));
+        monthlyAssetET.setText(object.getString(CommonConstants.MONTHLY_ASSETS));
+        employeeWageET.setText(object.getString(CommonConstants.EMPLOYEE_WAGE));
 
-        imageLoader.display(profilePictureIV, CommonConstants.SERVICE_PROFILE_PIC + sharedPreferences.getString(CommonConstants.PROFILE_PICTURE, ""));
+        kasSaatIniET.setText(object.getString(CommonConstants.KAS));
+        tabunganET.setText(object.getString(CommonConstants.TABUNGAN));
+        persediaanBarangET.setText(object.getString(CommonConstants.PERSEDIAAN));
+        rumahTanahET.setText(object.getString(CommonConstants.RUMAH));
+        kendaraanET.setText(object.getString(CommonConstants.KENDARAAN));
+        alatUsahaET.setText(object.getString(CommonConstants.ALAT));
+        barangBerhargaET.setText(object.getString(CommonConstants.BARANG));
+        piutangET.setText(object.getString(CommonConstants.PIUTANG));
+        hutangBankET.setText(object.getString(CommonConstants.HUTANG));
+
+        imageLoader.display(profilePictureIV, CommonConstants.SERVICE_PROFILE_PIC + object.getString(CommonConstants.PROFILE_PICTURE));
     }
 
     private void makePopupDialog() {
