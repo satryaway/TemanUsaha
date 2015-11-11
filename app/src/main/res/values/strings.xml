@@ -166,4 +166,7 @@
     <string name="confirmed">Confirmed</string>
     <string name="password_incorrect">Your password is incorrect</string>
     <string name="password_not_matched">Password is not matched</string>
+    <string name="logout_confirmation_msg">Are you sure want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

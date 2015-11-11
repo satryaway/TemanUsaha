@@ -1,7 +1,10 @@
 package com.samstudio.temanusaha;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -19,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageView optionMenuIV, profileIV, applicationStatusIV;
     private Context context = MainActivity.this;
     private ImageView grabIV;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = TemanUsahaApplication.getInstance().getSharedPreferences();
         initUI();
         setCallback();
         putData();
@@ -48,15 +53,21 @@ public class MainActivity extends AppCompatActivity {
                         switch (item.getItemId()) {
                             case R.id.term_of_service:
                                 intent.setClass(context, TermsActivity.class);
+                                startActivity(intent);
                                 break;
 
                             case R.id.change_password:
                                 intent.setClass(context, ChangePasswordActivity.class);
+                                startActivity(intent);
                                 break;
+
+                            case R.id.logout:
+                                doLogOut();
+                                break;
+
                             default:
                                 break;
                         }
-                        startActivity(intent);
                         return true;
                     }
                 });
@@ -87,8 +98,34 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void doLogOut() {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage(R.string.logout_confirmation_msg);
+        alert.setTitle(R.string.logout);
+        alert.setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alert.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alert.show();
+    }
+
     private void putData() {
-        if(!TemanUsahaApplication.getInstance().isCustomer()) {
+        if (!TemanUsahaApplication.getInstance().isCustomer()) {
             grabIV.setImageResource(R.drawable.get_cust);
         }
     }
