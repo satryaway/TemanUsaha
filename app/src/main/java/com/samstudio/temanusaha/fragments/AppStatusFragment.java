@@ -83,13 +83,15 @@ public class AppStatusFragment extends Fragment {
 
                     case "meet up":
                         intent = new Intent(getActivity(), MeetUpProcessActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
                         intent.putExtra(CommonConstants.PHONE_NUMBER, applicationList.get(position).getPartner().getPhoneNumber());
+                        intent.putExtra(CommonConstants.MEETUP_DATETIME, applicationList.get(position).getMeetupDatetime());
+                        intent.putExtra(CommonConstants.MEETUP_VENUE, applicationList.get(position).getMeetupVenue());
                         break;
 
                     case "approved":
                         intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
                         intent.putExtra(CommonConstants.ID, applicationList.get(position).getId());
                         break;
 
@@ -99,7 +101,7 @@ public class AppStatusFragment extends Fragment {
 
                     case "confirmed":
                         intent = new Intent(getActivity(), AppConfirmedActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
                         break;
 
                     default:

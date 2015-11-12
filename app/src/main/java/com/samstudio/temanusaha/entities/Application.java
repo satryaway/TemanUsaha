@@ -5,7 +5,7 @@ package com.samstudio.temanusaha.entities;
  * Application model
  */
 public class Application {
-    private String id, datetime, status;
+    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue;
     private Partner partner = new Partner();
     public Application (){}
 
@@ -39,5 +39,29 @@ public class Application {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getProcessDatetime() {
+        return processDatetime;
+    }
+
+    public void setProcessDatetime(String processDatetime) {
+        this.processDatetime = processDatetime;
+    }
+
+    public String getMeetupVenue() {
+        return meetupVenue;
+    }
+
+    public void setMeetupVenue(String meetupVenue) {
+        this.meetupVenue = meetupVenue;
+    }
+
+    public String getMeetupDatetime() {
+        return meetupDatetime;
+    }
+
+    public void setMeetupDatetime(String meetupDatetime) {
+        this.meetupDatetime = meetupDatetime;
     }
 }

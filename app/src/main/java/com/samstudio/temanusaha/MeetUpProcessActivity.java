@@ -19,8 +19,8 @@ import com.samstudio.temanusaha.util.CommonConstants;
  * activity to display meet up process
  */
 public class MeetUpProcessActivity extends AppCompatActivity {
-    private TextView dateTV;
-    private String date, phoneNumber;
+    private TextView dateTV, venueTV;
+    private String date, phoneNumber, meetupDatetime, meetupVenue;
     private ImageView callPartnerIV;
 
     @Override
@@ -37,11 +37,14 @@ public class MeetUpProcessActivity extends AppCompatActivity {
         Intent intent = getIntent();
         date = intent.getStringExtra(CommonConstants.DATE);
         phoneNumber = intent.getStringExtra(CommonConstants.PHONE_NUMBER);
+        meetupDatetime = intent.getStringExtra(CommonConstants.MEETUP_DATETIME);
+        meetupVenue = intent.getStringExtra(CommonConstants.MEETUP_VENUE);
     }
 
     private void initUI() {
         setContentView(R.layout.meet_up_process_layout);
         dateTV = (TextView) findViewById(R.id.date_tv);
+        venueTV = (TextView) findViewById(R.id.venue_tv);
         callPartnerIV = (ImageView) findViewById(R.id.call_partner_iv);
     }
 
@@ -70,6 +73,7 @@ public class MeetUpProcessActivity extends AppCompatActivity {
     }
 
     private void putData() {
-        dateTV.setText(date);
+        dateTV.setText(meetupDatetime);
+        venueTV.setText(meetupVenue);
     }
 }

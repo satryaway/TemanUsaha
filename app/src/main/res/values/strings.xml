@@ -172,4 +172,6 @@
     <string name="email_will_be_sent">An email will be sent to reset your password</string>
     <string name="reset_password">Reset Password</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="at">at</string>
+    <string name="default_venue">Jalan Raya Tanjungsari no. 399 kec. Tanjungsari, kab. Sumedang</string>
 </resources>

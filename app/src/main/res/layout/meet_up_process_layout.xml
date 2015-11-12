@@ -14,8 +14,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/nothing"
             android:src="@drawable/meetup" />
@@ -31,12 +31,13 @@
             android:textStyle="bold" />
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/please_wait_on"
+            android:text="@string/on"
             android:textSize="16sp" />
 
         <TextView
@@ -50,11 +51,34 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/at"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/venue_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/default_venue"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <ImageView
             android:id="@+id/call_partner_iv"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/nothing"
             android:src="@drawable/call" />

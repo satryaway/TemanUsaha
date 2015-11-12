@@ -104,4 +104,7 @@ public class CommonConstants {
     public static String BARANG = "barang";
     public static String PIUTANG = "piutang";
     public static String HUTANG = "hutang";
+    public static String PROCESS_DATETIME = "process_datetime";
+    public static String MEETUP_DATETIME = "meetup_datetime";
+    public static String MEETUP_VENUE = "meetup_venue";
 }
