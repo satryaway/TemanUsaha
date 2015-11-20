@@ -150,7 +150,7 @@ public class AppStatusFragment extends Fragment {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED))) {
+                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED))) {
                                 applicationList.add(application);
                             }
                         }
