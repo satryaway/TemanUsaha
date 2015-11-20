@@ -111,6 +111,20 @@
                     android:prompt="@string/jangka_waktu" />
             </LinearLayout>
 
+            <EditText
+                android:id="@+id/usage_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner_edittext"
+                android:gravity="top|left"
+                android:hint="@string/default_usage"
+                android:inputType="textMultiLine"
+                android:lines="4"
+                android:minLines="4"
+                android:padding="10dp"
+                android:singleLine="false" />
+
         </LinearLayout>
     </LinearLayout>
 

@@ -107,4 +107,5 @@ public class CommonConstants {
     public static String PROCESS_DATETIME = "process_datetime";
     public static String MEETUP_DATETIME = "meetup_datetime";
     public static String MEETUP_VENUE = "meetup_venue";
+    public static String USAGE = "usage";
 }

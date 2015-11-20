@@ -36,6 +36,7 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
     private Partner partner = new Partner();
     private UniversalImageLoader imageLoader;
     private Button sendAppBtn;
+    private String usage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
         loanSegment = intent.getIntExtra(CommonConstants.LOAN_SEGMENT, 0);
         loanPeriod = intent.getIntExtra(CommonConstants.LOAN_PERIOD, 0);
         personalityShape = intent.getIntExtra(CommonConstants.SHAPE_CODE, 0);
+        usage = intent.getStringExtra(CommonConstants.USAGE);
     }
 
     private void initUI() {
@@ -91,6 +93,7 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
         requestParams.put(CommonConstants.LOAN_TYPE, loanType);
         requestParams.put(CommonConstants.LOAN_SEGMENT, loanSegment);
         requestParams.put(CommonConstants.LOAN_PERIOD, loanPeriod);
+        requestParams.put(CommonConstants.USAGE, usage);
 
         APIAgent.post(url, requestParams, new JsonHttpResponseHandler() {
 

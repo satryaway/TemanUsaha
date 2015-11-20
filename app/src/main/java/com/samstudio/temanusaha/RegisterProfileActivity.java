@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
@@ -30,6 +31,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
     private int creditPurpose = 0, creditCeiling = 0, timeRange = 0;
     private int shapeCode;
     private ImageView searchPartnerIV;
+    private EditText usageET;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class RegisterProfileActivity extends AppCompatActivity {
         creditPurposeSP = (Spinner) findViewById(R.id.tujuan_kredit_sp);
         creditCeilingSP = (Spinner) findViewById(R.id.plafon_kredit_sp);
         timeRangeSP = (Spinner) findViewById(R.id.jangka_waktu_sp);
+        usageET = (EditText) findViewById(R.id.usage_et);
 
         creditPurposeList = Seeder.getCreditPurposeList(this);
         creditCeilingList = Seeder.getCreditCeilingList(this);
@@ -114,12 +117,17 @@ public class RegisterProfileActivity extends AppCompatActivity {
         searchPartnerIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterProfileActivity.this, ShowMapActivity.class);
-                intent.putExtra(CommonConstants.SHAPE_CODE, shapeCode);
-                intent.putExtra(CommonConstants.LOAN_TYPE, creditPurpose);
-                intent.putExtra(CommonConstants.LOAN_SEGMENT, creditCeiling);
-                intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
-                startActivity(intent);
+                if (!usageET.getText().toString().isEmpty()) {
+                    Intent intent = new Intent(RegisterProfileActivity.this, ShowMapActivity.class);
+                    intent.putExtra(CommonConstants.SHAPE_CODE, shapeCode);
+                    intent.putExtra(CommonConstants.LOAN_TYPE, creditPurpose);
+                    intent.putExtra(CommonConstants.LOAN_SEGMENT, creditCeiling);
+                    intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
+                    intent.putExtra(CommonConstants.USAGE, usageET.getText().toString());
+                    startActivity(intent);
+                } else {
+                    usageET.setError(getString(R.string.should_not_be_empty_error));
+                }
             }
         });
     }

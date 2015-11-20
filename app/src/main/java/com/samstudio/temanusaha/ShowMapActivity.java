@@ -41,6 +41,7 @@ public class ShowMapActivity extends AppCompatActivity {
     private int loanType, loanSegment, timeRange, personalityShape;
     private int chosenId = 1;
     private ImageView nextIV;
+    private String usage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class ShowMapActivity extends AppCompatActivity {
         loanType = intent.getIntExtra(CommonConstants.LOAN_TYPE, 0);
         loanSegment = intent.getIntExtra(CommonConstants.LOAN_SEGMENT, 0);
         timeRange = intent.getIntExtra(CommonConstants.LOAN_PERIOD, 0);
+        usage = intent.getStringExtra(CommonConstants.USAGE);
     }
 
     private void initUI() {
@@ -76,6 +78,7 @@ public class ShowMapActivity extends AppCompatActivity {
                 intent.putExtra(CommonConstants.LOAN_SEGMENT, loanSegment);
                 intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
                 intent.putExtra(CommonConstants.SHAPE_CODE, personalityShape);
+                intent.putExtra(CommonConstants.USAGE, usage);
                 startActivity(intent);
             }
         });
