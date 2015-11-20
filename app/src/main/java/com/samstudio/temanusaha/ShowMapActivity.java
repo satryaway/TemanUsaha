@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -42,6 +43,7 @@ public class ShowMapActivity extends AppCompatActivity {
     private int chosenId = 1;
     private ImageView nextIV;
     private String usage;
+    private HashMap<Marker, Integer> hashMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,41 +105,45 @@ public class ShowMapActivity extends AppCompatActivity {
         double lng = Double.valueOf(TemanUsahaApplication.getInstance().getSharedPreferences().getString(CommonConstants.LONGITUDE, "0.0"));
         LatLng latLng = new LatLng(lat, lng);
         if (null != googleMap) {
-            googleMap.addMarker(new MarkerOptions()
+            Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(getString(R.string.your_location))
                     .draggable(false)
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_white)));
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.tu_white)));
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+            hashMap.put(marker, -1);
         }
     }
 
     private void addMarkers() {
         addCurrentLocation();
+        addMarker();
+    }
+
+    private void addMarker() {
+
         int i = 0;
         for (Partner partner : partnerList) {
             LatLng latLng = new LatLng(partner.getLat(), partner.getLng());
-            addMarker(latLng, partner.getCompany(), i);
-            i++;
-        }
-    }
-
-    private void addMarker(final LatLng pos, String name, final int position) {
-        if (null != googleMap) {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(pos)
-                    .title(name)
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(partner.getCompany())
                     .draggable(false)
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon)));
-
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    chosenId = partnerList.get(position).getId();
-                    return false;
-                }
-            });
+            hashMap.put(marker, i);
+            i++;
         }
+
+        final HashMap<Marker, Integer> markerIntegerHashMap = hashMap;
+
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (markerIntegerHashMap.get(marker) != -1)
+                    chosenId = partnerList.get(markerIntegerHashMap.get(marker)).getId();
+                return false;
+            }
+        });
     }
 
     private void putData() {

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
     private UniversalImageLoader imageLoader;
     private Button sendAppBtn;
     private String usage;
+    private RelativeLayout wholeWrapper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,8 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
         ptBranchTV = (TextView) findViewById(R.id.kcp_name_tv);
         strengthTV = (TextView) findViewById(R.id.pt_strength_tv);
         sendAppBtn = (Button) findViewById(R.id.send_app_btn);
-    }
+        wholeWrapper = (RelativeLayout) findViewById(R.id.whole_wrapper);
+}
 
     private void setCallBack() {
         sendAppBtn.setOnClickListener(new View.OnClickListener() {
@@ -146,6 +149,7 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
             @Override
             public void onStart() {
                 super.onStart();
+                wholeWrapper.setVisibility(View.INVISIBLE);
                 progressDialog.show();
             }
 
@@ -203,5 +207,6 @@ public class PartnerConfirmationActivity extends AppCompatActivity {
         ptNameTV.setText(partner.getCompany());
         ptBranchTV.setText(partner.getBranch());
         strengthTV.setText(partner.getDescription());
+        wholeWrapper.setVisibility(View.VISIBLE);
     }
 }
