@@ -108,4 +108,6 @@ public class CommonConstants {
     public static String MEETUP_DATETIME = "meetup_datetime";
     public static String MEETUP_VENUE = "meetup_venue";
     public static String USAGE = "usage";
+    public static int CREATE_LOAN_CODE = 27;
+    public static String NOTES = "notes";
 }

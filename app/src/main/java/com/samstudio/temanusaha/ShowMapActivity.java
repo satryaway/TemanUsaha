@@ -81,7 +81,7 @@ public class ShowMapActivity extends AppCompatActivity {
                 intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
                 intent.putExtra(CommonConstants.SHAPE_CODE, personalityShape);
                 intent.putExtra(CommonConstants.USAGE, usage);
-                startActivity(intent);
+                startActivityForResult(intent, CommonConstants.CREATE_LOAN_CODE);
             }
         });
     }
@@ -195,5 +195,14 @@ public class ShowMapActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CommonConstants.CREATE_LOAN_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }

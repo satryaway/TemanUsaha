@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         grabIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PickShapeActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, PickShapeActivity.class), CommonConstants.CREATE_LOAN_CODE);
             }
         });
 
@@ -136,5 +136,13 @@ public class MainActivity extends AppCompatActivity {
         deviceID = sharedPreferences.getString(CommonConstants.GCM_TOKEN, "");
         latitude = sharedPreferences.getString(CommonConstants.LATITUDE, "");
         longitude = sharedPreferences.getString(CommonConstants.LONGITUDE, "");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CommonConstants.CREATE_LOAN_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent(MainActivity.this, AppStatusActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -87,6 +87,7 @@ public class AppStatusFragment extends Fragment {
                         intent.putExtra(CommonConstants.PHONE_NUMBER, applicationList.get(position).getPartner().getPhoneNumber());
                         intent.putExtra(CommonConstants.MEETUP_DATETIME, applicationList.get(position).getMeetupDatetime());
                         intent.putExtra(CommonConstants.MEETUP_VENUE, applicationList.get(position).getMeetupVenue());
+                        intent.putExtra(CommonConstants.NOTES, applicationList.get(position).getNotes());
                         break;
 
                     case "approved":

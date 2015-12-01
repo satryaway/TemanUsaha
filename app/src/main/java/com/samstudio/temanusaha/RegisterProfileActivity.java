@@ -10,9 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.samstudio.temanusaha.entities.CreditCeiling;
-import com.samstudio.temanusaha.entities.CreditPurpose;
-import com.samstudio.temanusaha.entities.TimeRange;
 import com.samstudio.temanusaha.util.CommonConstants;
 import com.samstudio.temanusaha.util.Seeder;
 
@@ -62,14 +59,14 @@ public class RegisterProfileActivity extends AppCompatActivity {
 
         ArrayAdapter<String> dataAdapter;
 
-        dataAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_item, creditPurposeList);
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, creditPurposeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         creditPurposeSP.setAdapter(dataAdapter);
         creditPurposeSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                creditPurpose = position+1;
+                creditPurpose = position + 1;
             }
 
             @Override
@@ -78,14 +75,14 @@ public class RegisterProfileActivity extends AppCompatActivity {
             }
         });
 
-        dataAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_item, creditCeilingList);
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, creditCeilingList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         creditCeilingSP.setAdapter(dataAdapter);
         creditCeilingSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                creditCeiling = position+1;
+                creditCeiling = position + 1;
             }
 
             @Override
@@ -94,14 +91,14 @@ public class RegisterProfileActivity extends AppCompatActivity {
             }
         });
 
-        dataAdapter = new ArrayAdapter <String>(this, android.R.layout.simple_spinner_item, timeRangeList);
+        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, timeRangeList);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         timeRangeSP.setAdapter(dataAdapter);
         timeRangeSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                timeRange = position+1;
+                timeRange = position + 1;
             }
 
             @Override
@@ -124,11 +121,20 @@ public class RegisterProfileActivity extends AppCompatActivity {
                     intent.putExtra(CommonConstants.LOAN_SEGMENT, creditCeiling);
                     intent.putExtra(CommonConstants.LOAN_PERIOD, timeRange);
                     intent.putExtra(CommonConstants.USAGE, usageET.getText().toString());
-                    startActivity(intent);
+                    startActivityForResult(intent, CommonConstants.CREATE_LOAN_CODE);
                 } else {
                     usageET.setError(getString(R.string.should_not_be_empty_error));
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CommonConstants.CREATE_LOAN_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent();
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }

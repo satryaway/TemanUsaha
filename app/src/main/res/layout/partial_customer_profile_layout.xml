@@ -13,6 +13,7 @@
         android:id="@+id/id_card_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/id_card_number"
         android:inputType="number" />
 
     <TextView
@@ -25,6 +26,7 @@
         android:id="@+id/expired_id_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/expired_id_date"
         android:inputType="text" />
 
     <TextView
@@ -37,6 +39,7 @@
         android:id="@+id/email_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -49,6 +52,7 @@
         android:id="@+id/address_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/address"
         android:inputType="textMultiLine" />
 
     <TextView
@@ -61,6 +65,7 @@
         android:id="@+id/phone_number_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/phone_number"
         android:inputType="phone" />
 
     <TextView

@@ -5,7 +5,7 @@ package com.samstudio.temanusaha.entities;
  * Application model
  */
 public class Application {
-    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue;
+    private String id, datetime, status, processDatetime, meetupDatetime, meetupVenue, notes;
     private Partner partner = new Partner();
     public Application (){}
 
@@ -63,5 +63,13 @@ public class Application {
 
     public void setMeetupDatetime(String meetupDatetime) {
         this.meetupDatetime = meetupDatetime;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

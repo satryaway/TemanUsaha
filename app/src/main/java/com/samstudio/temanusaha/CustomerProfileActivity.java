@@ -74,6 +74,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private RadioButton entrepreneurRB;
     private UniversalImageLoader imageLoader;
     private EditText kasSaatIniET, tabunganET, persediaanBarangET, rumahTanahET, kendaraanET, alatUsahaET, barangBerhargaET, piutangET, hutangBankET;
+    private ImageView closeActivityIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +138,8 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
     private void initUI() {
         setContentView(R.layout.customer_profile_layout);
+
+        closeActivityIV = (ImageView) findViewById(R.id.close_activity_iv);
         profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
         firstNameET = (EditText) findViewById(R.id.first_name_et);
         lastNameET = (EditText) findViewById(R.id.last_name_et);
@@ -198,6 +201,12 @@ public class CustomerProfileActivity extends AppCompatActivity {
     }
 
     private void setCallBack() {
+        closeActivityIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         profilePictureIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -242,6 +251,566 @@ public class CustomerProfileActivity extends AppCompatActivity {
                     isManualChange = true;
                     monthlyIncomeET.setText(addCommaToCurrency(value).reverse());
                     monthlyIncomeET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        educationExpensesET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    educationExpensesET.setText(addCommaToCurrency(value).reverse());
+                    educationExpensesET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        householdExpensesET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    householdExpensesET.setText(addCommaToCurrency(value).reverse());
+                    householdExpensesET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        transportExpensesET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    transportExpensesET.setText(addCommaToCurrency(value).reverse());
+                    transportExpensesET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        waterAndElectricyExpensesET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    waterAndElectricyExpensesET.setText(addCommaToCurrency(value).reverse());
+                    waterAndElectricyExpensesET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        miscExpensesET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    miscExpensesET.setText(addCommaToCurrency(value).reverse());
+                    miscExpensesET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        monthlyAssetET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    monthlyAssetET.setText(addCommaToCurrency(value).reverse());
+                    monthlyAssetET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        employeeWageET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    employeeWageET.setText(addCommaToCurrency(value).reverse());
+                    employeeWageET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        kasSaatIniET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    kasSaatIniET.setText(addCommaToCurrency(value).reverse());
+                    kasSaatIniET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        tabunganET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    tabunganET.setText(addCommaToCurrency(value).reverse());
+                    tabunganET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        persediaanBarangET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    persediaanBarangET.setText(addCommaToCurrency(value).reverse());
+                    persediaanBarangET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        rumahTanahET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    rumahTanahET.setText(addCommaToCurrency(value).reverse());
+                    rumahTanahET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        kendaraanET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    kendaraanET.setText(addCommaToCurrency(value).reverse());
+                    kendaraanET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        alatUsahaET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    alatUsahaET.setText(addCommaToCurrency(value).reverse());
+                    alatUsahaET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        barangBerhargaET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    barangBerhargaET.setText(addCommaToCurrency(value).reverse());
+                    barangBerhargaET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        piutangET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    piutangET.setText(addCommaToCurrency(value).reverse());
+                    piutangET.setSelection(addCommaToCurrency(value).length());
+                } catch (Exception e) {
+                    // Do nothing since not a number
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        hutangBankET.addTextChangedListener(new TextWatcher() {
+
+            boolean isManualChange = false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before,
+                                      int count) {
+                if (isManualChange) {
+                    isManualChange = false;
+                    return;
+                }
+
+                try {
+                    String value = s.toString().replace(",", "");
+                    isManualChange = true;
+                    hutangBankET.setText(addCommaToCurrency(value).reverse());
+                    hutangBankET.setSelection(addCommaToCurrency(value).length());
                 } catch (Exception e) {
                     // Do nothing since not a number
                 }
@@ -312,7 +881,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            showDate(year, monthOfYear, dayOfMonth);
+            showDate(year, monthOfYear+1, dayOfMonth);
         }
     };
 
@@ -539,15 +1108,15 @@ public class CustomerProfileActivity extends AppCompatActivity {
         parameters.put(CommonConstants.LATITUDE, sharedPreferences.getString(CommonConstants.LATITUDE, "0.0"));
         parameters.put(CommonConstants.LONGITUDE, sharedPreferences.getString(CommonConstants.LONGITUDE, "0.0"));
 
-        parameters.put(CommonConstants.KAS, kasSaatIniET.getText().toString());
-        parameters.put(CommonConstants.TABUNGAN, tabunganET.getText().toString());
-        parameters.put(CommonConstants.PERSEDIAAN, persediaanBarangET.getText().toString());
-        parameters.put(CommonConstants.RUMAH, rumahTanahET.getText().toString());
-        parameters.put(CommonConstants.KENDARAAN, kendaraanET.getText().toString());
-        parameters.put(CommonConstants.ALAT, alatUsahaET.getText().toString());
-        parameters.put(CommonConstants.BARANG, barangBerhargaET.getText().toString());
-        parameters.put(CommonConstants.PIUTANG, piutangET.getText().toString());
-        parameters.put(CommonConstants.HUTANG, hutangBankET.getText().toString());
+        parameters.put(CommonConstants.KAS, removeComma(kasSaatIniET.getText().toString()));
+        parameters.put(CommonConstants.TABUNGAN, removeComma(tabunganET.getText().toString()));
+        parameters.put(CommonConstants.PERSEDIAAN, removeComma(persediaanBarangET.getText().toString()));
+        parameters.put(CommonConstants.RUMAH, removeComma(rumahTanahET.getText().toString()));
+        parameters.put(CommonConstants.KENDARAAN, removeComma(kendaraanET.getText().toString()));
+        parameters.put(CommonConstants.ALAT, removeComma(alatUsahaET.getText().toString()));
+        parameters.put(CommonConstants.BARANG, removeComma(barangBerhargaET.getText().toString()));
+        parameters.put(CommonConstants.PIUTANG, removeComma(piutangET.getText().toString()));
+        parameters.put(CommonConstants.HUTANG, removeComma(hutangBankET.getText().toString()));
 
         if (userImageFile != null)
             parameters.put(CommonConstants.PROFILE_PICTURE, userImageFile);
