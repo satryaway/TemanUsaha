@@ -153,11 +153,11 @@ public class AppStatusFragment extends Fragment {
                         JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
-                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.APPROVED) || application.getStatus().equals(CommonConstants.PROCESS))) {
+                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.PROCESS))) {
                                 applicationList.add(application);
                             }
 
-                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED))) {
+                            if (position == 1 && (application.getStatus().equals(CommonConstants.CONFIRMED) || application.getStatus().equals(CommonConstants.REJECTED) || application.getStatus().equals(CommonConstants.CANCELLED) || application.getStatus().equals(CommonConstants.APPROVED))) {
                                 applicationList.add(application);
                             }
                         }

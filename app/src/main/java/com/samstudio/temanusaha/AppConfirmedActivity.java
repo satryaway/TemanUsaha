@@ -32,7 +32,7 @@ public class AppConfirmedActivity extends AppCompatActivity {
     private void handleIntent() {
         Intent intent = getIntent();
         date = intent.getStringExtra(CommonConstants.DATE);
-        isConfirmed = intent.getBooleanExtra(CommonConstants.IS_CONFIRMED, true);
+        isConfirmed = intent.getBooleanExtra(CommonConstants.IS_CONFIRMED, false);
     }
 
     private void initUI() {
