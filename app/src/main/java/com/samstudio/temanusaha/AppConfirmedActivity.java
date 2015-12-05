@@ -17,6 +17,8 @@ public class AppConfirmedActivity extends AppCompatActivity {
     private String date;
     private TextView dateTV;
     private Button okBtn;
+    private boolean isConfirmed;
+    private TextView messageTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,14 @@ public class AppConfirmedActivity extends AppCompatActivity {
     private void handleIntent() {
         Intent intent = getIntent();
         date = intent.getStringExtra(CommonConstants.DATE);
+        isConfirmed = intent.getBooleanExtra(CommonConstants.IS_CONFIRMED, true);
     }
 
     private void initUI() {
         setContentView(R.layout.app_approved_layout);
         dateTV = (TextView) findViewById(R.id.date_tv);
         okBtn = (Button) findViewById(R.id.ok_btn);
+        messageTV = (TextView) findViewById(R.id.message_tv);
     }
 
     private void setCallBack() {
@@ -49,5 +53,7 @@ public class AppConfirmedActivity extends AppCompatActivity {
 
     private void putData() {
         dateTV.setText(date);
+        if(isConfirmed)
+            messageTV.setText(R.string.you_have_confirmed);
     }
 }

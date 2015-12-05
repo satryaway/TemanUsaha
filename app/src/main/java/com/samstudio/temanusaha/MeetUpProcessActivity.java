@@ -22,6 +22,8 @@ public class MeetUpProcessActivity extends AppCompatActivity {
     private TextView dateTV, venueTV;
     private String date, phoneNumber, meetupDatetime, meetupVenue;
     private ImageView callPartnerIV;
+    private String notes;
+    private TextView notesTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class MeetUpProcessActivity extends AppCompatActivity {
         phoneNumber = intent.getStringExtra(CommonConstants.PHONE_NUMBER);
         meetupDatetime = intent.getStringExtra(CommonConstants.MEETUP_DATETIME);
         meetupVenue = intent.getStringExtra(CommonConstants.MEETUP_VENUE);
+        notes = intent.getStringExtra(CommonConstants.NOTES);
     }
 
     private void initUI() {
@@ -46,6 +49,7 @@ public class MeetUpProcessActivity extends AppCompatActivity {
         dateTV = (TextView) findViewById(R.id.date_tv);
         venueTV = (TextView) findViewById(R.id.venue_tv);
         callPartnerIV = (ImageView) findViewById(R.id.call_partner_iv);
+        notesTV = (TextView) findViewById(R.id.notes_tv);
     }
 
     private void setCallBack() {
@@ -75,5 +79,6 @@ public class MeetUpProcessActivity extends AppCompatActivity {
     private void putData() {
         dateTV.setText(meetupDatetime);
         venueTV.setText(meetupVenue);
+        notesTV.setText(notes);
     }
 }

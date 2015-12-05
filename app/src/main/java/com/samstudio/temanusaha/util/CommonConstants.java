@@ -110,4 +110,7 @@ public class CommonConstants {
     public static String USAGE = "usage";
     public static int CREATE_LOAN_CODE = 27;
     public static String NOTES = "notes";
+    public static String IS_CANCELLED = "is_cancelled";
+    public static String IS_CONFIRMED = "is_confirmed";
+    public static String PROCESS = "process";
 }

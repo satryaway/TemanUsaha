@@ -20,6 +20,7 @@ public class TextConverter {
             case "approved" : convertedCode = context.getString(R.string.waiting_for_approval); break;
             case "confirmed" : convertedCode = context.getString(R.string.confirmed); break;
             case "cancelled" : convertedCode = context.getString(R.string.cancelled); break;
+            case "process" : convertedCode = context.getString(R.string.waiting_for_confirmation); break;
             default: convertedCode = context.getString(R.string.rejected); break;
         }
 

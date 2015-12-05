@@ -176,4 +176,11 @@
     <string name="default_venue">Jalan Raya Tanjungsari no. 399 kec. Tanjungsari, kab. Sumedang</string>
     <string name="notes">Notes...</string>
     <string name="default_usage">Penggunaan kredit : ex. untuk pembelian sepeda motor baru, untuk pembelian rumah, dll</string>
+    <string name="waiting_for_confirmation">Waiting for confirmation</string>
+    <string name="apply_date">apply_date</string>
+    <string name="process">Process</string>
+    <string name="reject">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="you_have_cancelled_an_app">You have cancelled a loan application</string>
+    <string name="you_have_confirmed">You have confirmed your application to be processed</string>
 </resources>

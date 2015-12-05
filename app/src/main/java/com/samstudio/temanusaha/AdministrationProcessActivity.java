@@ -7,6 +7,11 @@ import android.widget.TextView;
 
 import com.samstudio.temanusaha.util.CommonConstants;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by satryaway on 10/17/2015.
  * activity for administration process
@@ -40,6 +45,28 @@ public class AdministrationProcessActivity extends AppCompatActivity {
     }
 
     private void setData() {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+
+        Date newDate = null;
+        String str = null;
+
+        try {
+            newDate = inputFormat.parse(date);
+            str = outputFormat.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar c = Calendar.getInstance();
+        try {
+            c.setTime(outputFormat.parse(str));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.add(Calendar.DATE, 1);
+        date = outputFormat.format(c.getTime());
+
         dateTV.setText(date);
     }
 }

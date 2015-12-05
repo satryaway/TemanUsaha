@@ -18,7 +18,7 @@ import com.samstudio.temanusaha.AppRejectedActivity;
 import com.samstudio.temanusaha.MeetUpProcessActivity;
 import com.samstudio.temanusaha.R;
 import com.samstudio.temanusaha.TemanUsahaApplication;
-import com.samstudio.temanusaha.WaitingForApprovalActivity;
+import com.samstudio.temanusaha.WaitingForConfirmationActivity;
 import com.samstudio.temanusaha.adapters.AppStatusListAdapter;
 import com.samstudio.temanusaha.entities.Application;
 import com.samstudio.temanusaha.util.APIAgent;
@@ -90,9 +90,9 @@ public class AppStatusFragment extends Fragment {
                         intent.putExtra(CommonConstants.NOTES, applicationList.get(position).getNotes());
                         break;
 
-                    case "approved":
-                        intent = new Intent(getActivity(), WaitingForApprovalActivity.class);
-                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
+                    case "process":
+                        intent = new Intent(getActivity(), WaitingForConfirmationActivity.class);
+                        intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         intent.putExtra(CommonConstants.ID, applicationList.get(position).getId());
                         break;
 
@@ -100,13 +100,19 @@ public class AppStatusFragment extends Fragment {
                         intent = new Intent(getActivity(), AppRejectedActivity.class);
                         break;
 
+                    case "cancelled":
+                        intent = new Intent(getActivity(), AppRejectedActivity.class);
+                        intent.putExtra(CommonConstants.IS_CANCELLED, true);
+                        break;
+
                     case "confirmed":
                         intent = new Intent(getActivity(), AppConfirmedActivity.class);
+                        intent.putExtra(CommonConstants.IS_CONFIRMED, true);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getProcessDatetime());
                         break;
 
                     default:
-                        intent = new Intent(getActivity(), AppRejectedActivity.class);
+                        intent = new Intent(getActivity(), AppConfirmedActivity.class);
                         intent.putExtra(CommonConstants.DATE, applicationList.get(position).getDatetime());
                         break;
                 }
@@ -147,7 +153,7 @@ public class AppStatusFragment extends Fragment {
                         JSONArray jsonArray = response.getJSONArray(CommonConstants.RETURN_DATA);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             Application application = Utility.parseApplications(jsonArray.getJSONObject(i));
-                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.APPROVED))) {
+                            if (position == 0 && (application.getStatus().equals(CommonConstants.ADMINISTRATION_PROCESS) || application.getStatus().equals(CommonConstants.MEET_UP) || application.getStatus().equals(CommonConstants.APPROVED) || application.getStatus().equals(CommonConstants.PROCESS))) {
                                 applicationList.add(application);
                             }
 

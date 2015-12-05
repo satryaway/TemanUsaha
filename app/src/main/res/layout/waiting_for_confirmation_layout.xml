@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="@string/waiting_for_approval"
+            android:text="@string/waiting_for_confirmation"
             android:textAllCaps="true"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -37,7 +37,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@string/please_wait_up_to_date"
+            android:text="@string/apply_date"
             android:textSize="16sp" />
 
         <TextView
@@ -58,29 +58,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/body_wrapper"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
         android:weightSum="2">
 
-        <ImageView
-            android:id="@+id/cancel_app_iv"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/confirm_app_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:contentDescription="@string/nothing"
-            android:padding="10dp"
-            android:src="@drawable/reject" />
+            android:background="@drawable/green_rounded_corner_edittext"
+            android:text="@string/confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/confirm_app_iv"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/cancel_app_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:contentDescription="@string/nothing"
-            android:padding="10dp"
-            android:src="@drawable/approve" />
+            android:background="@drawable/red_rounded_corner_edittext"
+            android:text="@string/reject"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

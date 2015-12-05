@@ -85,6 +85,7 @@ public class Utility {
             application.setProcessDatetime(jsonObject.getString(CommonConstants.PROCESS_DATETIME));
             application.setMeetupDatetime(jsonObject.getString(CommonConstants.MEETUP_DATETIME));
             application.setMeetupVenue(jsonObject.getString(CommonConstants.MEETUP_VENUE));
+            application.setNotes(jsonObject.getString(CommonConstants.NOTES));
 
             partner.setFirstName(jsonObject.getString(CommonConstants.FIRST_NAME));
             partner.setLastName(jsonObject.getString(CommonConstants.LAST_NAME));

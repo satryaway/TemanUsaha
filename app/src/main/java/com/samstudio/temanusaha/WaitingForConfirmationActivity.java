@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +23,11 @@ import cz.msebera.android.httpclient.Header;
  * Created by satryaway on 10/25/2015.
  * waiting for approval page
  */
-public class WaitingForApprovalActivity extends AppCompatActivity {
+public class WaitingForConfirmationActivity extends AppCompatActivity {
     private String date, appId;
     private TextView dateTV;
-    private ImageView confirmAppIV, cancelAppIV;
+    private Button confirmAppIV;
+    private Button cancelAppIV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,10 @@ public class WaitingForApprovalActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        setContentView(R.layout.waiting_for_approval_layout);
+        setContentView(R.layout.waiting_for_confirmation_layout);
         dateTV = (TextView) findViewById(R.id.date_tv);
-        confirmAppIV = (ImageView) findViewById(R.id.confirm_app_iv);
-        cancelAppIV = (ImageView) findViewById(R.id.cancel_app_iv);
+        confirmAppIV = (Button) findViewById(R.id.confirm_app_btn);
+        cancelAppIV = (Button) findViewById(R.id.cancel_app_btn);
     }
 
     private void setCallBack() {
@@ -92,8 +93,8 @@ public class WaitingForApprovalActivity extends AppCompatActivity {
                 try {
                     int status = response.getInt(CommonConstants.STATUS);
                     if (status == CommonConstants.STATUS_OK) {
-                        Toast.makeText(WaitingForApprovalActivity.this, response.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(WaitingForApprovalActivity.this, AppStatusActivity.class);
+                        Toast.makeText(WaitingForConfirmationActivity.this, response.getString(CommonConstants.MESSAGE), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(WaitingForConfirmationActivity.this, AppStatusActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
@@ -104,12 +105,12 @@ public class WaitingForApprovalActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(WaitingForApprovalActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WaitingForConfirmationActivity.this, R.string.RTO, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Toast.makeText(WaitingForApprovalActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WaitingForConfirmationActivity.this, R.string.SERVER_ERROR, Toast.LENGTH_SHORT).show();
             }
         });
     }
