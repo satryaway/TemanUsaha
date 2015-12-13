@@ -113,4 +113,5 @@ public class CommonConstants {
     public static String IS_CANCELLED = "is_cancelled";
     public static String IS_CONFIRMED = "is_confirmed";
     public static String PROCESS = "process";
+    public static String SUPPORT_EMAIL = "support@temanusaha.com";
 }
