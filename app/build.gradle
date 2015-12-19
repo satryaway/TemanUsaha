@@ -21,6 +21,11 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Testing dependencies
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
+    androidTestCompile 'com.android.support.test:runner:0.2'
+    androidTestCompile 'com.android.support:support-annotations:23.0.1'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.soundcloud.android:android-crop:1.0.0@aar'
     compile 'com.google.android.gms:play-services:7.8.0'
@@ -30,9 +35,4 @@ dependencies {
     compile 'org.json:json:20140107'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.loopj.android:android-async-http:1.4.9'
-
-    // Testing dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
-    androidTestCompile 'com.android.support.test:runner:0.2'
-    androidTestCompile 'com.android.support:support-annotations:23.0.1'
 }
